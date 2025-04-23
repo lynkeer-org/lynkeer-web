@@ -1,0 +1,12 @@
+{
+  "name": "@lynkeer/biome-config",
+  "version": "1.0.0",
+  "type": "module",
+  "private": "true",
+  "files": ["*.json"],
+  "exports": {
+    "./base": "./base.json",
+    "./next-js": "./nextjs.json",
+    "./ui": "./ui.json"
+  }
+}

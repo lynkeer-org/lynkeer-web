@@ -1,0 +1,7 @@
+{
+  "extends": ["@lynkeer/biome-config/base"],
+  "files": {
+    "ignoreUnknown": false,
+    "ignore": ["**/node_modules/**", "**/dist/**", "**/.turbo/**", "pnpm-lock.yaml"]
+  }
+}

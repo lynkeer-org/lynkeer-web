@@ -1,0 +1,68 @@
+{
+  "extends": ["./base.json"],
+  "linter": {
+    "rules": {
+      "recommended": true,
+
+      "performance": {
+        "noAccumulatingSpread": "error",
+        "noDelete": "error"
+      },
+
+      "style": {
+        "useConsistentArrayType": "error",
+        "useImportType": "error",
+        "useExportType": "error",
+        "useShorthandArrayType": "error",
+        "noNamespace": "error",
+        "noVar": "error",
+        "useTemplate": "error",
+        "useDefaultParameterLast": "error",
+        "noNegationElse": "error",
+        "useBlockStatements": "error",
+        "useConst": "error",
+        "useSelfClosingElements": "error"
+      },
+
+      "correctness": {
+        "noUnusedVariables": "error",
+        "useExhaustiveDependencies": "error",
+        "noConstAssign": "error",
+        "noUndeclaredVariables": "error"
+      },
+
+      "suspicious": {
+        "noConsoleLog": "warn",
+        "noExplicitAny": "warn",
+        "noEmptyInterface": "warn",
+        "noShadowRestrictedNames": "error"
+      },
+
+      "complexity": {
+        "noBannedTypes": "error",
+        "noStaticOnlyClass": "error",
+        "noUselessFragments": "error",
+        "noForEach": "warn"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 120,
+    "bracketSpacing": true
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteStyle": "double",
+      "arrowParentheses": "always",
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "bracketSameLine": false,
+      "bracketSpacing": true
+    }
+  }
+}

@@ -1,4 +1,3 @@
 {
-  "extends": "@workspace/typescript-config/base.json"
+  "extends": "@lynkeer/typescript-config/base.json"
 }
-

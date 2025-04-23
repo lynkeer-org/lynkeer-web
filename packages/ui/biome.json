@@ -1,0 +1,13 @@
+{
+  "extends": ["@lynkeer/biome-config/ui"],
+  "files": {
+    "ignore": [
+      "node_modules",
+      "dist",
+      ".storybook/static",
+      "storybook-static",
+      "coverage",
+      "**/*.stories.{js,jsx,ts,tsx}"
+    ]
+  }
+}

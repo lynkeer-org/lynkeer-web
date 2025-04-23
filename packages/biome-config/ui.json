@@ -1,0 +1,67 @@
+{
+  "extends": ["./base.json"],
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "recommended": true,
+        "useAltText": "error",
+        "useAriaPropsForRole": "error",
+        "useButtonType": "error",
+        "useKeyWithClickEvents": "error",
+        "useValidAnchor": "error",
+        "noSvgWithoutTitle": "warn"
+      },
+
+      "style": {
+        "recommended": true,
+        "useBlockStatements": "error",
+        "useConst": "error",
+        "useConsistentArrayType": "error",
+        "useImportType": "error",
+        "useExportType": "error",
+        "useSingleCaseStatement": "error",
+        "useTemplate": "error"
+      },
+
+      "correctness": {
+        "recommended": true,
+        "noUnusedVariables": "error",
+        "useExhaustiveDependencies": "error"
+      },
+
+      "suspicious": {
+        "recommended": true,
+        "noConsoleLog": "warn",
+        "noExplicitAny": "warn",
+        "noRedundantUseStrict": "error"
+      },
+
+      "complexity": {
+        "recommended": true,
+        "noBannedTypes": "error",
+        "noUselessFragments": "error"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 120,
+    "bracketSpacing": true
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteStyle": "double",
+      "arrowParentheses": "always",
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "bracketSameLine": false,
+      "bracketSpacing": true
+    }
+  }
+}
