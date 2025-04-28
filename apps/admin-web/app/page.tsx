@@ -1,11 +1,12 @@
-import { Button } from "@lynkeer/ui/components/button";
+import { LogoIcon } from "@lynkeer/ui/components/logoIcon";
 
 export default function Page() {
   return (
     <div className="flex items-center justify-center min-h-svh">
       <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Hello World</h1>
-        <Button size="sm">Button</Button>
+        <h1 className="text-2xl font-bold flex items-center">
+          Welcome to <LogoIcon className="size-8 ml-3" /> Lynkeer!!{" "}
+        </h1>
       </div>
     </div>
   );

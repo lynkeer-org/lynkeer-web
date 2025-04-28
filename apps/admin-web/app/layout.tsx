@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type React from "react";
 
 import "@lynkeer/ui/globals.css";
-import { Providers } from "@/components/providers";
+import { Providers } from "@/providers/providers";
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -21,6 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <title>Lynkeer</title>
+      </head>
+
       <body className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}>
         <Providers>{children}</Providers>
       </body>
