@@ -1,13 +1,11 @@
-import { LogoIcon } from "@lynkeer/ui/components/logoIcon";
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold flex items-center">
-          Welcome to <LogoIcon className="size-8 ml-3" /> Lynkeer!!{" "}
-        </h1>
-      </div>
-    </div>
-  );
+  const logged = false;
+
+  if (!logged) {
+    redirect("/auth/sign-up");
+  }
+
+  redirect("/cards");
 }

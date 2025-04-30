@@ -9,7 +9,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@lynkeer/ui/components/dropdown-menu";
+} from "@lynkeer/ui/components/dropdownMenu";
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
