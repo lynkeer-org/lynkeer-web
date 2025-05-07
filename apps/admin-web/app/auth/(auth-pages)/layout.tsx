@@ -1,6 +1,8 @@
+import { auth } from "@/features/auth/lib/auth";
 import { LogoFull } from "@lynkeer/ui/components/logoFull";
 import { ModeToggle } from "@lynkeer/ui/components/modeToggle";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import type React from "react";
 
@@ -8,7 +10,13 @@ interface Props {
   readonly children: React.ReactNode;
 }
 
-export default function AuthLayout({ children }: Props) {
+export default async function AuthLayout({ children }: Props) {
+  const session = await auth();
+
+  if (session) {
+    redirect("/");
+  }
+
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
       <div className="absolute top-3 right-3">

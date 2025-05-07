@@ -1,11 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function Page() {
-  const logged = false;
-
-  if (!logged) {
-    redirect("/auth/sign-up");
-  }
-
-  redirect("/cards");
+export default async function Page() {
+  redirect(`${process.env.DEFAULT_ROUTE}`);
 }
