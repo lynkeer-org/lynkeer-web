@@ -1,8 +1,11 @@
+import { Toaster } from "@lynkeer/ui/components/sonner";
 import { Geist, Geist_Mono } from "next/font/google";
-import type React from "react";
 
+import { Providers } from "@/providers/providers";
+
+import type { Metadata } from "next";
+import type React from "react";
 import "@lynkeer/ui/globals.css";
-import { Providers } from "@/components/providers";
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -14,7 +17,15 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 });
 
-export default function RootLayout({
+export const metadata: Metadata = {
+  title: "Lynkeer",
+};
+
+if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+  import("@/mocks/startClient").then((mod) => mod.startClient());
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -23,6 +34,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}>
         <Providers>{children}</Providers>
+        <Toaster richColors />
       </body>
     </html>
   );
