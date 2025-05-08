@@ -2,7 +2,6 @@
 
 import { signInSchema } from "@/features/auth/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,15 +15,17 @@ import { Label } from "@lynkeer/ui/components/label";
 
 import { InputPassword } from "@/features/auth/components/inputPassword";
 
+import { signInAction } from "@/app/auth/actions/signIn";
 import type { SignInType } from "@/features/auth/types/auth";
 import type { SubmitHandler } from "react-hook-form";
 
 export function SignInForm() {
-  const [loading, setLoading] = useState(false);
-  const [hasHydrated, setHasHydrated] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const errorParam = searchParams.get("error");
+
+  const [loading, setLoading] = useState(false);
+  const [hasHydrated, setHasHydrated] = useState(false);
 
   const {
     register,
@@ -45,16 +46,12 @@ export function SignInForm() {
   const handleSignIn: SubmitHandler<SignInType> = async (data) => {
     try {
       setLoading(true);
-      const response = await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-      });
+      const response = await signInAction(data);
 
-      if (response.ok) {
-        router.replace("/");
-      } else {
+      if (response?.error) {
         toast.error("Correo o contraseña incorrectos. Intenta de nuevo.");
+      } else {
+        router.replace("/");
       }
     } catch (_error) {
       toast.error("Correo o contraseña incorrectos. Intenta de nuevo.");

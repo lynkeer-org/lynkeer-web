@@ -3,7 +3,7 @@ import camelCaseKeys from "camelcase-keys";
 import snakeCaseKeys from "snakecase-keys";
 
 const base = axios.create({
-  baseURL: `${process.env.BASE_URL_API}/api`,
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL_API}/api`,
   headers: {
     "Content-Type": "application/json",
   },

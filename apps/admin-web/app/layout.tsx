@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: "Lynkeer",
 };
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+  import("@/mocks/startClient").then((mod) => mod.startClient());
+}
+
 export default async function RootLayout({
   children,
 }: Readonly<{

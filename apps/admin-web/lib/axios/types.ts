@@ -1,5 +1,5 @@
-interface Response<T> {
-  data: T;
-}
+import type { AxiosResponse } from "axios";
 
-export type { Response };
+type ApiResponse<T> = AxiosResponse<T>;
+
+export type { ApiResponse };

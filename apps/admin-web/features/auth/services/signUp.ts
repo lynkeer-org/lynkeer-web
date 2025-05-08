@@ -1,21 +1,13 @@
 import { errorTypes } from "@/features/auth/lib/errorTypes";
 import type { OwnerType, UserType } from "@/features/auth/types/auth";
 import { publicApi } from "@/lib/axios/publicApi";
-import type { Response } from "@/lib/axios/types";
 
-// Mock implementation
-async function signUpRequest(_data: OwnerType) {
+async function signUpRequest(data: OwnerType) {
   try {
-    // Original implementation
-    // const response = await publicApi.post("/auth/sign-up", data);
-    // return response;
+    const response = await publicApi.post("/auth/sign-up", data);
 
-    // Mock implementation
-    // throw new Error("Error: sign-up");
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    return { status: 201 };
+    return { status: response.status };
   } catch (error) {
-    // TODO: Use a sentry system to log an error.
     return {
       error: {
         code: errorTypes.SIGN_UP_ERROR,

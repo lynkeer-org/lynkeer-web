@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default async function LayoutDashboard({ children }: Props) {
-  const session = await auth();
+  const session = await auth.auth();
 
   if (!session) {
     redirect("/auth/sign-in");

@@ -21,14 +21,5 @@ interface UserType extends Pick<OwnerType, "firstName" | "email"> {
   accessToken: string;
 }
 
-type AuthType = (context?: GetServerSidePropsContext) => Promise<{
-  user: {
-    id: string;
-    accessToken: string;
-    firstName?: string | null;
-    email?: string | null;
-  } | null;
-}>;
-
 export { ownerSchema, signInSchema };
-export type { OwnerType, SignInType, UserType, AuthType };
+export type { OwnerType, SignInType, UserType };
