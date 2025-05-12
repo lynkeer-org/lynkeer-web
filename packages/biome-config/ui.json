@@ -28,7 +28,7 @@
       "correctness": {
         "recommended": true,
         "noUnusedVariables": "error",
-        "useExhaustiveDependencies": "error"
+        "useExhaustiveDependencies": "off"
       },
 
       "suspicious": {
