@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 
+import { internalApi } from "@/lib/axios/internalApi";
 import { Button } from "@lynkeer/ui/components/button";
 import { Input } from "@lynkeer/ui/components/input";
 import { Label } from "@lynkeer/ui/components/label";
@@ -17,8 +18,23 @@ function CardForm() {
     handleSubmit,
   } = useForm<CardType>({ resolver: zodResolver(cardSchema) });
 
-  const handleCreateCard: SubmitHandler<CardType> = (_data) => {
-    // TODO: Implement the logic to create a card
+  const handleCreateCard: SubmitHandler<CardType> = async (data) => {
+    try {
+      // TODO: Move this logic to a action server
+      const classResponse = await internalApi.post("/wallet/google/loyaltyClass", data);
+
+      const objectResponse = await internalApi.post("/wallet/google/loyaltyObject", {
+        classId: classResponse.data.classId,
+        name: "Andres Valencia",
+        email: "afvalenciab@gmail.com",
+        urlImageStamps: "http://farm8.staticflickr.com/7340/11177041185_a61a7f2139_o.jpg",
+        stamps: "4",
+      });
+
+      window.open(objectResponse.data.url, "_blank");
+    } catch (_error) {
+      // TODO: Handle error
+    }
   };
 
   return (
@@ -33,8 +49,8 @@ function CardForm() {
                 type="text"
                 placeholder="Nombre de la tarjeta"
                 required
-                aria-invalid={Boolean(errors.name)}
-                {...register("name")}
+                aria-invalid={Boolean(errors.cardName)}
+                {...register("cardName")}
               />
             </div>
 

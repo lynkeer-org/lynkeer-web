@@ -74,7 +74,7 @@ export function NavUser({
 
             <DropdownMenuSeparator />
 
-            <Link href="auth/sign-out">
+            <Link href="/auth/sign-out">
               <DropdownMenuItem>
                 <IconLogout />
                 Cerrar sesión
