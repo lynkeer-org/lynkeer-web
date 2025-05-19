@@ -14,5 +14,7 @@ export async function POST(request: NextRequest) {
   const classSuffix = `loyalty_${slugify(body.cardName, { lower: true, strict: true })}_${ownerId}`;
   const classId = await loyaltyPass.createClass(body, classSuffix);
 
+  console.log("LoyaltyClass", classId);
+
   return NextResponse.json({ classId }, { status: 200 });
 }

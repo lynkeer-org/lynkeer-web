@@ -32,7 +32,8 @@ function CardForm() {
       });
 
       window.open(objectResponse.data.url, "_blank");
-    } catch (_error) {
+    } catch (error) {
+      console.error("Error creating card: cardForm.tsx", { error });
       // TODO: Handle error
     }
   };

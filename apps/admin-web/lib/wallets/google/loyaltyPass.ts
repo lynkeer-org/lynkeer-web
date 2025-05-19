@@ -14,7 +14,7 @@ export class LoyaltyPass {
 
   constructor() {
     const clientEmail = process.env.GOOGLE_WALLET_CLIENT_EMAIL as string;
-    const privateKey = process.env.GOOGLE_WALLET_PRIVATE_KEY as string;
+    const privateKey = process.env.GOOGLE_WALLET_PRIVATE_KEY?.replace(/\\n/g, "\n") as string;
 
     this.credentials = {
       client_email: clientEmail,
@@ -30,6 +30,8 @@ export class LoyaltyPass {
     });
 
     this.client = google.walletobjects({ version: "v1", auth });
+
+    console.log("Credentials:", this.credentials);
   }
 
   async createClass(cardData: CardType, classSuffix: string): Promise<string> {
@@ -41,6 +43,8 @@ export class LoyaltyPass {
 
       // biome-ignore lint/suspicious/noExplicitAny: <Access to error response>
     } catch (err: any) {
+      console.error("Error getting: loyaltyPass ", { err });
+
       if (err?.response?.status !== 404) {
         return classId;
       }
