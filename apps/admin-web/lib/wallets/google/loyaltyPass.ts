@@ -31,13 +31,11 @@ export class LoyaltyPass {
     });
 
     this.client = google.walletobjects({ version: "v1", auth });
-
-    console.log("Credentials:", this.credentials);
   }
 
   async createClass(cardData: CardType, classSuffix: string): Promise<string> {
     const classId = `${this.issuerId}.${classSuffix}`;
-    const defaultLogo = `${baseAppUrl}/images/defaultLogoStore.png`;
+    const defaultLogo = `${baseAppUrl}/images/defaultStore.png`;
 
     try {
       await this.client.loyaltyclass.get({ resourceId: classId });
@@ -45,8 +43,6 @@ export class LoyaltyPass {
 
       // biome-ignore lint/suspicious/noExplicitAny: <Access to error response>
     } catch (err: any) {
-      console.error("Error getting: loyaltyPass ", { err });
-
       if (err?.response?.status !== 404) {
         return classId;
       }
@@ -68,6 +64,7 @@ export class LoyaltyPass {
           },
         },
       },
+      hexBackgroundColor: "#FFFFFF",
     };
 
     await this.client.loyaltyclass.insert({

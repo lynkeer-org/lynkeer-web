@@ -33,8 +33,7 @@ function CardForm() {
       });
 
       window.open(objectResponse.data.url, "_blank");
-    } catch (error) {
-      console.error("Error creating card: cardForm.tsx", { error });
+    } catch (_error) {
       // TODO: Handle error
     }
   };
@@ -43,7 +42,7 @@ function CardForm() {
     <div className="px-6">
       <form onSubmit={handleSubmit(handleCreateCard)}>
         <div className="grid gap-6">
-          <div className="grid gap-6 grid-cols-2 items-start">
+          <div className="grid gap-6 grid-cols-1 items-start lg:grid-cols-2">
             <div className="grid gap-2">
               <Label htmlFor="cardName">Nombre de la tarjeta</Label>
               <Input
