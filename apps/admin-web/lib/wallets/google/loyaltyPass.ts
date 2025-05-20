@@ -3,6 +3,7 @@ import { google } from "googleapis";
 import type { walletobjects_v1 } from "googleapis";
 import jwt from "jsonwebtoken";
 
+const baseAppUrl = process.env.NEXT_PUBLIC_APP_URL;
 export class LoyaltyPass {
   private credentials: {
     client_email: string;
@@ -36,6 +37,7 @@ export class LoyaltyPass {
 
   async createClass(cardData: CardType, classSuffix: string): Promise<string> {
     const classId = `${this.issuerId}.${classSuffix}`;
+    const defaultLogo = `${baseAppUrl}/images/defaultLogoStore.png`;
 
     try {
       await this.client.loyaltyclass.get({ resourceId: classId });
@@ -57,7 +59,7 @@ export class LoyaltyPass {
       reviewStatus: "UNDER_REVIEW",
       programLogo: {
         sourceUri: {
-          uri: "http://farm8.staticflickr.com/7340/11177041185_a61a7f2139_o.jpg",
+          uri: defaultLogo,
         },
         contentDescription: {
           defaultValue: {
@@ -66,7 +68,6 @@ export class LoyaltyPass {
           },
         },
       },
-      hexBackgroundColor: "#000",
     };
 
     await this.client.loyaltyclass.insert({

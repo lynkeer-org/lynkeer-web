@@ -27,8 +27,9 @@ function CardForm() {
         classId: classResponse.data.classId,
         name: "Andres Valencia",
         email: "afvalenciab@gmail.com",
-        urlImageStamps: "http://farm8.staticflickr.com/7340/11177041185_a61a7f2139_o.jpg",
-        stamps: "4",
+        urlImageStamps:
+          "https://lynkeer-web-admin-git-feature-lkr-371961-afvalenciabs-projects.vercel.app/api/wallet/stamps/9/2/stamps.png",
+        stamps: "2",
       });
 
       window.open(objectResponse.data.url, "_blank");
