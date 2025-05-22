@@ -1,4 +1,8 @@
 {
   "editor.defaultFormatter": "biomejs.biome",
-  "cSpell.words": ["lynkeer", "sonner"]
+  "cSpell.words": [
+    "loyaltyclass",
+    "lynkeer",
+    "sonner"
+  ]
 }

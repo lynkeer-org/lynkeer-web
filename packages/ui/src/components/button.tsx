@@ -56,12 +56,14 @@ function Button({
   return (
     <Comp
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size, className }), "cursor-pointer")}
       disabled={loading || disabled}
       {...props}
     >
-      {loading && <Loader2 className="animate-spin" />}
-      {children}
+      <span className="inline-flex items-center gap-1">
+        {loading && <Loader2 className="animate-spin" />}
+        {children}
+      </span>
     </Comp>
   );
 }

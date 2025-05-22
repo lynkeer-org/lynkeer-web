@@ -29,4 +29,11 @@ const base = axios.create({
   ],
 });
 
-export { base };
+const internal = axios.create({
+  baseURL: "/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+export { base, internal };

@@ -19,7 +19,7 @@ export const handlers = [
 
     if (body.email === "test@lynkeer.com" && body.password === "1234") {
       return HttpResponse.json(
-        { id: "1234", firstName: "Andres", email: body.email, accessToken: "test_token" },
+        { id: "1040735495", firstName: "Andres", email: body.email, accessToken: "test_token" },
         { status: 200 },
       );
     }
