@@ -87,7 +87,7 @@ export function SignInForm() {
                 <InputPassword aria-invalid={Boolean(errors.password)} {...register("password")} />
               </div>
 
-              <Button type="submit" className="w-full cursor-pointer" loading={loading}>
+              <Button type="submit" className="w-full" loading={loading}>
                 Inicia sesión
               </Button>
             </div>
