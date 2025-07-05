@@ -1,11 +1,13 @@
+import { auth } from "@/features/auth/lib/auth";
 import { base } from "@/lib/axios/base";
 import { redirect } from "next/navigation";
 
 const privateApi = base;
 
 privateApi.interceptors.request.use(
-  (config) => {
-    const token = null; // TODO: Get token from next session
+  async (config) => {
+    const session = await auth.auth();
+    const token = session?.user.accessToken;
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

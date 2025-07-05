@@ -1,5 +1,5 @@
 export const pageTitles = new Map([
   ["/reports", "Reportes"],
-  ["/cards", "Tarjetas"],
+  ["/passes", "Tarjetas"],
   ["/clients-data", "Datos de clientes"],
 ]);
