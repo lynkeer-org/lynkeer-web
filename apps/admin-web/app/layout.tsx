@@ -1,6 +1,7 @@
 import { Toaster } from "@lynkeer/ui/components/sonner";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { apiMockingEnv } from "@/lib/utils/environmentValues";
 import { Providers } from "@/providers/providers";
 
 import type { Metadata } from "next";
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   title: "Lynkeer",
 };
 
-if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+if (apiMockingEnv === "enabled") {
   import("@/mocks/startClient").then((mod) => mod.startClient());
 }
 

@@ -51,7 +51,7 @@ const data = {
     },
     {
       title: "Tarjetas",
-      url: "/cards",
+      url: "/passes",
       icon: IconPlayCardStar,
     },
     {

@@ -1,9 +1,9 @@
-import type { CardType } from "@/features/cards/types/cardSchema";
 import { google } from "googleapis";
-import type { walletobjects_v1 } from "googleapis";
 import jwt from "jsonwebtoken";
 
-const baseAppUrl = process.env.NEXT_PUBLIC_APP_URL;
+import type { LoyaltyPassType } from "@/features/passes/types/loyaltyPassSchema";
+import type { walletobjects_v1 } from "googleapis";
+
 export class LoyaltyPass {
   private credentials: {
     client_email: string;
@@ -33,9 +33,8 @@ export class LoyaltyPass {
     this.client = google.walletobjects({ version: "v1", auth });
   }
 
-  async createClass(cardData: CardType, classSuffix: string): Promise<string> {
+  async createClass(passData: LoyaltyPassType, classSuffix: string): Promise<string> {
     const classId = `${this.issuerId}.${classSuffix}`;
-    const defaultLogo = `${baseAppUrl}/images/defaultStore.png`;
 
     try {
       await this.client.loyaltyclass.get({ resourceId: classId });
@@ -43,28 +42,28 @@ export class LoyaltyPass {
 
       // biome-ignore lint/suspicious/noExplicitAny: <Access to error response>
     } catch (err: any) {
-      if (err?.response?.status !== 404) {
+      if (err.response && err?.response?.status !== 404) {
         return classId;
       }
     }
 
     const newClass: walletobjects_v1.Schema$LoyaltyClass = {
       id: classId,
-      issuerName: cardData.cardName,
-      programName: cardData.cardName,
+      issuerName: passData.passName,
+      programName: passData.passName,
       reviewStatus: "UNDER_REVIEW",
       programLogo: {
         sourceUri: {
-          uri: defaultLogo,
+          uri: passData.logoUrl,
         },
         contentDescription: {
           defaultValue: {
             language: "en-US",
-            value: "Logo Store",
+            value: "Pass logo",
           },
         },
       },
-      hexBackgroundColor: "#FFFFFF",
+      hexBackgroundColor: passData.backgroundColor,
     };
 
     await this.client.loyaltyclass.insert({

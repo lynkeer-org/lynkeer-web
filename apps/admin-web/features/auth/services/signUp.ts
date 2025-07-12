@@ -1,5 +1,5 @@
 import { errorTypes } from "@/features/auth/lib/errorTypes";
-import type { OwnerType, UserType } from "@/features/auth/types/auth";
+import type { OwnerType } from "@/features/auth/types/auth";
 import { publicApi } from "@/lib/axios/publicApi";
 
 async function signUpRequest(data: OwnerType) {

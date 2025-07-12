@@ -1,4 +1,4 @@
-function CardPreview() {
+function PassPreview() {
   return (
     <aside className="flex-col items-center hidden md:flex">
       <div className="w-60 h-80 bg-muted border rounded-3xl" />
@@ -6,4 +6,4 @@ function CardPreview() {
   );
 }
 
-export { CardPreview };
+export { PassPreview };
