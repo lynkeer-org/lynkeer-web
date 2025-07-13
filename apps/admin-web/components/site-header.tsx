@@ -1,12 +1,13 @@
 "use client";
 
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { AppBreadcrumb } from "@/components/app-breadcrumb";
+import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 import { ModeToggle } from "@lynkeer/ui/components/modeToggle";
 import { Separator } from "@lynkeer/ui/components/separator";
 import { SidebarTrigger } from "@lynkeer/ui/components/sidebar";
 
 export function SiteHeader() {
-  const title = usePageTitle();
+  const { breadcrumbs } = useBreadcrumbs();
 
   return (
     <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
@@ -15,7 +16,7 @@ export function SiteHeader() {
 
         <Separator orientation="vertical" className="mx-2 data-[orientation=vertical]:h-4" />
 
-        <h1 className="text-base font-medium">{title}</h1>
+        <AppBreadcrumb items={breadcrumbs} />
 
         <div className="ml-auto flex items-center gap-2">
           <ModeToggle />
