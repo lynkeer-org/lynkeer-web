@@ -45,47 +45,45 @@ function PassForm() {
   };
 
   return (
-    <div className="px-6">
-      <form onSubmit={handleSubmit(handleCreatePass)}>
-        <div className="grid gap-6">
-          <div className="grid gap-6 grid-cols-1 items-start lg:grid-cols-2">
-            <div className="grid gap-2">
-              <Label htmlFor="passName">Nombre de la tarjeta</Label>
-              <Input
-                id="passName"
-                type="text"
-                placeholder="Nombre de la tarjeta"
-                required
-                aria-invalid={Boolean(errors.passName)}
-                {...register("passName")}
-              />
-            </div>
-
-            <div className="grid gap-2">
-              <Label htmlFor="stampGoal">Cantidad de sellos</Label>
-              <Input
-                id="stampGoal"
-                type="number"
-                placeholder="0"
-                max="30"
-                required
-                aria-invalid={Boolean(errors.stampGoal)}
-                errorMsg={errors.stampGoal?.message}
-                {...register("stampGoal")}
-              />
-            </div>
-
-            <input type="hidden" {...register("logoUrl")} value={defaultLogoUrl} />
-            <input type="hidden" {...register("textColor")} value="#000000" />
-            <input type="hidden" {...register("backgroundColor")} value="#FFFFFF" />
+    <form onSubmit={handleSubmit(handleCreatePass)}>
+      <div className="grid gap-6">
+        <div className="grid gap-6 grid-cols-1 items-start lg:grid-cols-2">
+          <div className="grid gap-2">
+            <Label htmlFor="passName">Nombre de la tarjeta</Label>
+            <Input
+              id="passName"
+              type="text"
+              placeholder="Nombre de la tarjeta"
+              required
+              aria-invalid={Boolean(errors.passName)}
+              {...register("passName")}
+            />
           </div>
 
-          <Button loading={isPending} type="submit">
-            Crear
-          </Button>
+          <div className="grid gap-2">
+            <Label htmlFor="stampGoal">Cantidad de sellos</Label>
+            <Input
+              id="stampGoal"
+              type="number"
+              placeholder="0"
+              max="30"
+              required
+              aria-invalid={Boolean(errors.stampGoal)}
+              errorMsg={errors.stampGoal?.message}
+              {...register("stampGoal")}
+            />
+          </div>
+
+          <input type="hidden" {...register("logoUrl")} value={defaultLogoUrl} />
+          <input type="hidden" {...register("textColor")} value="#000000" />
+          <input type="hidden" {...register("backgroundColor")} value="#FFFFFF" />
         </div>
-      </form>
-    </div>
+
+        <Button loading={isPending} type="submit">
+          Crear
+        </Button>
+      </div>
+    </form>
   );
 }
 
