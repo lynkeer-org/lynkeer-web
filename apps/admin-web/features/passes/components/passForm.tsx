@@ -1,12 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 
-import { loyaltyPassSchema } from "@/features/passes/types/loyaltyPassSchema";
 import type { LoyaltyPassType } from "@/features/passes/types/loyaltyPassSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@lynkeer/ui/components/button";
 import { Input } from "@lynkeer/ui/components/input";
@@ -26,7 +24,7 @@ function PassForm() {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<LoyaltyPassType>({ resolver: zodResolver(loyaltyPassSchema) });
+  } = useFormContext<LoyaltyPassType>();
 
   const handleCreatePass: SubmitHandler<LoyaltyPassType> = async (data) => {
     try {
@@ -75,8 +73,8 @@ function PassForm() {
           </div>
 
           <input type="hidden" {...register("logoUrl")} value={defaultLogoUrl} />
-          <input type="hidden" {...register("textColor")} value="#000000" />
-          <input type="hidden" {...register("backgroundColor")} value="#FFFFFF" />
+          <input type="hidden" {...register("textColor")} value="#000" />
+          <input type="hidden" {...register("backgroundColor")} value="#FFF" />
         </div>
 
         <Button loading={isPending} type="submit">

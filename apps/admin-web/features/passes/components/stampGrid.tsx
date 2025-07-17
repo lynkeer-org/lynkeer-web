@@ -3,7 +3,8 @@ import { generateStampsLayout } from "@/lib/wallets/stamps/generateStampsLayout"
 const baseAppUrl = process.env.NEXT_PUBLIC_APP_URL;
 
 function StampGrid({ totalStamps, filledStamps }: { totalStamps: number; filledStamps: number }) {
-  const defaultStampEmpty = `${baseAppUrl}/images/star-empty.svg`;
+  const defaultStampEmpty = "http://localhost:3000/images/star-empty.svg";
+  // const defaultStampEmpty = `${baseAppUrl}/images/star-empty.svg`;
   const defaultStampFilled = `${baseAppUrl}/images/star-fill.svg`;
   const containerWidth = 800;
   const containerHeight = 300;

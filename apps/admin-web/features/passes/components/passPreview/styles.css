@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@layer components {
+  .pass-header {
+    @apply flex items-center mb-5;
+  }
+
+  .pass-strip {
+    @apply flex justify-center;
+  }
+
+  .pass-fields {
+    @apply flex justify-between mt-2.5;
+  }
+
+  .pass-qrcode {
+    @apply flex flex-col flex-1 justify-end items-center;
+  }
+}
