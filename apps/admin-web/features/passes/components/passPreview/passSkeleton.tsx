@@ -1,6 +1,6 @@
 import { Skeleton } from "@lynkeer/ui/components/skeleton";
-import { PassContainer } from "./passContainer";
 import { ByLynkeer } from "./byLynkeer";
+import { PassContainer } from "./passContainer";
 import "./styles.css";
 
 const PassSkeleton = () => {
@@ -12,12 +12,12 @@ const PassSkeleton = () => {
       </div>
 
       <div id="pass-strip" className="pass-strip">
-        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-20 w-full" />
       </div>
 
       <div id="pass-fields" className="pass-fields">
-        <Skeleton className="h-4 w-1/2" />
-        <Skeleton className="h-4 w-1/2" />
+        <Skeleton className="h-8 w-1/3" />
+        <Skeleton className="h-8 w-1/3" />
       </div>
 
       <div id="pass-qrcode" className="pass-qrcode">

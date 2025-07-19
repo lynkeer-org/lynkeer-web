@@ -1,19 +1,24 @@
-@import "tailwindcss";
+.pass-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-@layer components {
-  .pass-header {
-    @apply flex items-center mb-5;
-  }
+.pass-strip {
+  display: flex;
+  justify-content: center;
+}
 
-  .pass-strip {
-    @apply flex justify-center;
-  }
+.pass-fields {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
 
-  .pass-fields {
-    @apply flex justify-between mt-2.5;
-  }
-
-  .pass-qrcode {
-    @apply flex flex-col flex-1 justify-end items-center;
-  }
+.pass-qrcode {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
 }

@@ -11,8 +11,8 @@ import { Input } from "@lynkeer/ui/components/input";
 import { Label } from "@lynkeer/ui/components/label";
 
 import { useCreatePassTemplates } from "@/features/passes/hooks/useCreatePassTemplates";
-
 import { defaultLogoUrlEnv } from "@/lib/utils/environmentValues";
+
 import { toast } from "sonner";
 
 function PassForm() {

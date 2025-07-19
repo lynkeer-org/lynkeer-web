@@ -8,7 +8,7 @@ import type { LoyaltyPassType } from "@/features/passes/types/loyaltyPassSchema"
 import { PassForm } from "@/features/passes/components/passForm";
 import { PassPreview } from "@/features/passes/components/passPreview";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@lynkeer/ui/components/tabs";
-import { useForm, FormProvider } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 export function CreatePassPageClient() {
   const methods = useForm<LoyaltyPassType>({ resolver: zodResolver(loyaltyPassSchema) });

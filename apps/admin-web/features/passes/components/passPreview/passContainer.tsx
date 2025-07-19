@@ -1,3 +1,4 @@
+import type React from "react";
 interface PassContainerProps {
   children: React.ReactNode;
   backgroundColor: string;
@@ -14,7 +15,7 @@ const PassContainer = ({ children, backgroundColor, textColor }: PassContainerPr
     <aside id="pass-container" className="flex-col items-center flex">
       <div
         style={customProperties as React.CSSProperties}
-        className="flex flex-col w-60 h-80 border rounded-3xl shadow-lg p-3 bg-[var(--pass-bg-color)] text-[var(--pass-text-color)]"
+        className="flex flex-col w-60 h-81 border rounded-3xl shadow-lg p-3 bg-[var(--pass-bg-color)] text-[var(--pass-text-color)]"
       >
         {children}
       </div>

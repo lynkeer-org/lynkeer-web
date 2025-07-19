@@ -5,5 +5,6 @@ const passTypeIdentifier = process.env.APPLE_PASS_TYPE_IDENTIFIER;
 
 export const defaultRouteEnv = defaultRoute || "/";
 export const apiMockingEnv = apiMocking;
-export const defaultLogoUrlEnv = `${baseAppUrl}/images/defaultStore.png`;
 export const passTypeIdentifierEnv = passTypeIdentifier;
+export const baseAppUrlEnv = baseAppUrl;
+export const defaultLogoUrlEnv = `${baseAppUrl}/images/defaultStore.png`;
