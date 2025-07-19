@@ -1,4 +1,5 @@
 import { generateStampsLayout } from "@/lib/wallets/stamps/generateStampsLayout";
+import Image from "next/image";
 
 const baseAppUrl = process.env.NEXT_PUBLIC_APP_URL;
 
@@ -35,14 +36,14 @@ function StampGrid({ totalStamps, filledStamps }: { totalStamps: number; filledS
           }}
         >
           {isFilled ? (
-            <img
+            <Image
               src={defaultStampFilled}
               alt="stamp filled"
               width={layout.stampSize * 0.5}
               height={layout.stampSize * 0.5}
             />
           ) : (
-            <img
+            <Image
               src={defaultStampEmpty}
               alt="stamp empty"
               width={layout.stampSize * 0.5}

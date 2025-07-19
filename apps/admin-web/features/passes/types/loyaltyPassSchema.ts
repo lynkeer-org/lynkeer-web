@@ -5,7 +5,7 @@ import type { PassField } from "@/features/passes/types/passFieldTypes";
 
 const loyaltyPassSchema = z.object({
   passName: z.string().min(1).max(50),
-  stampGoal: z.string({ message: "" }).min(1, "").max(30, "Máximo 30 sellos"),
+  stampGoal: z.string({ message: "" }).min(1, "Minimo 1 sello").max(30, "Máximo 30 sellos"),
   logoUrl: z.string().url(),
   textColor: z.string().regex(regexes.regexColor),
   backgroundColor: z.string().regex(regexes.regexColor),

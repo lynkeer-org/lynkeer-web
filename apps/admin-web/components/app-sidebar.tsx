@@ -1,24 +1,6 @@
 "use client";
 
-import {
-  IconCamera,
-  IconChartBar,
-  IconChartBarPopular,
-  IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconPlayCardStar,
-  IconReport,
-  IconSearch,
-  IconSettings,
-  IconUsers,
-} from "@tabler/icons-react";
+import { IconChartBarPopular, IconHelp, IconPlayCardStar, IconUsers } from "@tabler/icons-react";
 import type * as React from "react";
 
 import { NavMain } from "@/components/nav-main";

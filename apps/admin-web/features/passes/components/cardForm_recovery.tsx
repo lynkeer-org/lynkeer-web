@@ -7,13 +7,12 @@ import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 
 import { internalApi } from "@/lib/axios/internalApi";
-import { defaultLogoUrlEnv } from "@/lib/utils/environmentValues";
 import { Button } from "@lynkeer/ui/components/button";
 import { Input } from "@lynkeer/ui/components/input";
 import { Label } from "@lynkeer/ui/components/label";
 
 function CardForm() {
-  const defaultLogoUrl = defaultLogoUrlEnv;
+  const defaultLogoUrl = "/images/defaultStore.png";
 
   const {
     register,
