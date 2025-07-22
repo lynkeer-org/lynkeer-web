@@ -1,11 +1,10 @@
+import { baseAppUrlEnv } from "@/lib/utils/environmentValues";
 import { generateStampsLayout } from "@/lib/wallets/stamps/generateStampsLayout";
 import Image from "next/image";
 
-const baseAppUrl = process.env.NEXT_PUBLIC_APP_URL;
-
 function StampGrid({ totalStamps, filledStamps }: { totalStamps: number; filledStamps: number }) {
-  const defaultStampEmpty = `${baseAppUrl}/images/star-empty.svg`;
-  const defaultStampFilled = `${baseAppUrl}/images/star-fill.svg`;
+  const defaultStampEmpty = `${baseAppUrlEnv}/images/star-empty.svg`;
+  const defaultStampFilled = `${baseAppUrlEnv}/images/star-fill.svg`;
   const containerWidth = 800;
   const containerHeight = 300;
   const gap = 20;
