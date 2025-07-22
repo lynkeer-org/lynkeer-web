@@ -3,26 +3,56 @@
   "ui": "tui",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**"
+      ]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
     },
     "//#lint:root": {},
     "format": {
-      "dependsOn": ["^format"]
+      "dependsOn": [
+        "^format"
+      ]
     },
     "check:fix": {
-      "dependsOn": ["^check:fix"]
+      "dependsOn": [
+        "^check:fix"
+      ]
     },
     "check-types": {
-      "dependsOn": ["^check-types"]
+      "dependsOn": [
+        "^check-types"
+      ]
     },
     "dev": {
       "cache": false,
       "persistent": true
     }
-  }
+  },
+  "globalEnv": [
+    "AUTH_SECRET",
+    "GOOGLE_WALLET_CLIENT_EMAIL",
+    "GOOGLE_WALLET_PRIVATE_KEY",
+    "GOOGLE_WALLET_ISSUER_ID",
+    "APPLE_CERT_PASSWORD",
+    "APPLE_PASS_TYPE_IDENTIFIER",
+    "APPLE_TEAM_IDENTIFIER",
+    "APPLE_AUTHENTICATION_TOKEN",
+    "NEXT_PUBLIC_APP_URL",
+    "NEXT_PUBLIC_BASE_URL_API",
+    "NEXT_PUBLIC_DEFAULT_ROUTE",
+    "NEXT_PUBLIC_API_MOCKING"
+  ]
 }

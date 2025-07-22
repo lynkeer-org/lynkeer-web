@@ -96,7 +96,20 @@ This will place the UI components in the `packages/ui/src/components` directory.
 Create a `.env` file in the root directory with the following variables:
 
 ```env
-# Add your environment variables here
+AUTH_SECRET=
+GOOGLE_WALLET_CLIENT_EMAIL=
+GOOGLE_WALLET_PRIVATE_KEY=
+GOOGLE_WALLET_ISSUER_ID=
+
+APPLE_CERT_PASSWORD=
+APPLE_PASS_TYPE_IDENTIFIER=
+APPLE_TEAM_IDENTIFIER=
+APPLE_AUTHENTICATION_TOKEN=
+
+NEXT_PUBLIC_APP_URL=
+NEXT_PUBLIC_BASE_URL_API=
+NEXT_PUBLIC_DEFAULT_ROUTE = 
+NEXT_PUBLIC_API_MOCKING=
 ```
 
 ## 🤝 Contributing
