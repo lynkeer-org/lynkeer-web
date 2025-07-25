@@ -44,3 +44,4 @@ npm-debug.log*
 
 # admin-web
 apps/admin-web/lib/wallets/apple/certificates/*
+.env*.local

@@ -1,27 +1,50 @@
-import fs from "node:fs";
-import path from "node:path";
-import { PKPass } from "passkit-generator";
-// import { v4 as uuid } from "uuid";
+import { baseAppUrlEnv } from "@/lib/utils/environmentValues";
+import {
+  appleCertificatePemBase64Env,
+  appleKeyPemBase64Env,
+  appleWwdrPemBase64Env,
+} from "@/lib/utils/environmentValues";
 
 export async function createLoyaltyPass(_storeName: string): Promise<Buffer> {
-  const modelDir = path.join(process.cwd(), "lib/wallets/apple/templates/loyalty.pass");
-  const certsDir = path.join(process.cwd(), "lib/wallets/apple/certificates");
-
   const certificates = {
-    wwdr: fs.readFileSync(path.join(certsDir, "AppleWWDR.pem")),
-    signerCert: fs.readFileSync(path.join(certsDir, "certificate.pem")),
-    signerKey: fs.readFileSync(path.join(certsDir, "key.pem")),
+    wwdr: Buffer.from(appleWwdrPemBase64Env || "", "base64"),
+    signerCert: Buffer.from(appleCertificatePemBase64Env || "", "base64"),
+    signerKey: Buffer.from(appleKeyPemBase64Env || "", "base64"),
     signerKeyPassphrase: process.env.APPLE_CERT_PASSWORD || "",
   };
 
-  const pass = await PKPass.from({ model: modelDir, certificates });
+  const { PKPass } = await import("passkit-generator");
 
-  const stripUrl =
-    "https://lynkeer-web-admin-git-feature-lkr-371961-afvalenciabs-projects.vercel.app/api/wallet/stamps/9/1/stamps.png";
+  const pass = new PKPass({}, certificates, {
+    description: "Example Apple Wallet Pass",
+    passTypeIdentifier: "pass.com.passkitgenerator",
+    serialNumber: "example",
+    organizationName: "Lynkeer",
+    teamIdentifier: "example",
+    foregroundColor: "#000",
+    labelColor: "#000",
+    backgroundColor: "#fff",
+  });
+
+  // pass.type = "storeCard";
+  // pass.headerFields.push(
+  //   {
+  //     key: "header-field-test-1",
+  //     value: "Unknown",
+  //   },
+  //   {
+  //     key: "header-field-test-2",
+  //     value: "unknown",
+  //   },
+  // );
+  // pass.addBuffer("icon.png", Buffer.from(iconFromModel));
+  // pass.addBuffer("icon@2x.png", Buffer.from(iconFromModel));
+  // pass.addBuffer("icon@3x.png", Buffer.from(iconFromModel));
+
+  const stripUrl = `${baseAppUrlEnv}/api/wallet/stamps/9/1/stamps.png`;
   const imageResponse = await fetch(stripUrl);
 
   const stripImage = await imageResponse.arrayBuffer();
-
   pass.addBuffer("strip.png", Buffer.from(stripImage));
 
   return await pass.getAsBuffer();

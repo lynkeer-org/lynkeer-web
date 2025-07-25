@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { createLoyaltyPass } from "@/lib/wallets/apple/createPass";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
