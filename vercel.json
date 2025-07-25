@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "apps/admin-web/app/api/wallet/apple/loyaltyPass/route.ts": {
-      "includeFiles": "apps/admin-web/lib/wallets/apple/templates/loyalty.pass/**"
-    }
-  }
-}
