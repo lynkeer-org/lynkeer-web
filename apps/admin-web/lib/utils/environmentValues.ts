@@ -1,6 +1,6 @@
 const defaultRoute = process.env.NEXT_PUBLIC_DEFAULT_ROUTE;
 const apiMocking = process.env.NEXT_PUBLIC_API_MOCKING;
-const baseAppUrl = process.env.NEXT_PUBLIC_VERCEL_URL;
+const baseAppUrl = process.env.NEXT_PUBLIC_APP_URL;
 const passTypeIdentifier = process.env.APPLE_PASS_TYPE_IDENTIFIER;
 const appleWwdrPemBase64 = process.env.APPLE_WWDR_PEM_BASE64;
 const appleCertificatePemBase64 = process.env.APPLE_CERTIFICATE_PEM_BASE64;
