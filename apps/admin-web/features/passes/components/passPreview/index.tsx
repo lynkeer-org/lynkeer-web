@@ -15,7 +15,6 @@ import { PassStrip } from "./passStrip";
 function PassPreview() {
   const { watch } = useFormContext();
   const formData = watch();
-
   const [walletProvider, setWalletProvider] = useState<"apple" | "google">("apple");
 
   const handleChangeWalletProvider = (value: string) => {
