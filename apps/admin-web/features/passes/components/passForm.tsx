@@ -72,9 +72,9 @@ function PassForm() {
             />
           </div>
 
-          <input type="hidden" {...register("logoUrl")} value={defaultLogoUrl} />
-          <input type="hidden" {...register("textColor")} value="#000" />
-          <input type="hidden" {...register("backgroundColor")} value="#FFF" />
+          <input type="hidden" {...register("logoUrl", { value: defaultLogoUrl })} />
+          <input type="hidden" {...register("textColor", { value: "#000000" })} />
+          <input type="hidden" {...register("backgroundColor", { value: "#FFFFFF" })} />
         </div>
 
         <Button loading={isPending} type="submit">

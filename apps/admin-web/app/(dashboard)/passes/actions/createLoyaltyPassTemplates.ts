@@ -26,7 +26,7 @@ async function createLoyaltyPassTemplates(form: LoyaltyPassType) {
 
     const passTemplateData: CreatePassTemplateType = {
       title: data.passName,
-      stampGoal: data.stampGoal,
+      stampGoal: data.stampGoal.toString(),
       logoUrl: data.logoUrl,
       textColor: data.textColor,
       backgroundColor: data.backgroundColor,

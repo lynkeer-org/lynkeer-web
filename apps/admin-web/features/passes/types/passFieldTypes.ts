@@ -10,7 +10,3 @@ export type PassField = {
   value: string;
   field_type: PassFieldConfig["field_type"];
 };
-
-export type GenericForm = {
-  [key: string]: string;
-};

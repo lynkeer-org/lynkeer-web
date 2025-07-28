@@ -17,17 +17,15 @@ export function CreatePassPageClient() {
   const methods = useForm<LoyaltyPassType>({
     defaultValues: {
       logoUrl: defaultLogoUrlEnv,
+      textColor: "#000000",
+      backgroundColor: "#FFFFFF",
     },
     resolver: zodResolver(loyaltyPassSchema),
   });
   const { isMobile, isDetectingDevice } = useIsMobile();
 
   if (isDetectingDevice) {
-    return (
-      <div>
-        <LoadingPage />
-      </div>
-    );
+    return <LoadingPage />;
   }
 
   return (
