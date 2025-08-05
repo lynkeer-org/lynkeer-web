@@ -9,6 +9,7 @@ const loyaltyPassSchema = z.object({
   logoUrl: z.string().url(),
   textColor: z.string().regex(regexes.regexColor),
   backgroundColor: z.string().regex(regexes.regexColor),
+  passTypeId: z.string(),
 });
 type LoyaltyPassType = z.infer<typeof loyaltyPassSchema>;
 
@@ -20,11 +21,12 @@ interface CreatePassTemplateType {
   backgroundColor: string;
   googleClassId: string;
   applePassTypeIdentifier: string;
-  passFields: PassField[];
+  passField: PassField[];
+  passTypeId: string;
 }
 
 interface CreatePassTemplateResponse extends CreatePassTemplateType {
-  uuid: string;
+  id: string;
 }
 
 export { loyaltyPassSchema };

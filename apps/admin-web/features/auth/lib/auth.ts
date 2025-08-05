@@ -13,6 +13,9 @@ declare module "next-auth" {
   }
 
   interface User {
+    id: string;
+    name: string;
+    email: string;
     token: string;
   }
 }
@@ -35,7 +38,12 @@ const auth = NextAuth({
             throw new Error("Invalid credentials");
           }
 
-          const user = { id: data.id, name: data.firstName, email: data.email, token: data.accessToken };
+          const user = {
+            id: data.user.id,
+            name: data.user.name?.split(" ")[0] || ((credentials.email as string).split("@")[0] as string),
+            email: data.user.email,
+            token: data.token,
+          };
 
           return user;
         } catch (_error) {
@@ -48,6 +56,8 @@ const auth = NextAuth({
     jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
         token.accessToken = user.token;
       }
       return token;
@@ -55,6 +65,8 @@ const auth = NextAuth({
     session({ session, token }) {
       session.user.id = token.id as string;
       session.user.accessToken = token.accessToken as string;
+      session.user.name = token.name as string;
+      session.user.email = token.email as string;
 
       return session;
     },

@@ -15,9 +15,13 @@ type OwnerType = z.infer<typeof ownerSchema>;
 const signInSchema = ownerSchema.pick({ email: true, password: true });
 type SignInType = z.infer<typeof signInSchema>;
 
-interface UserType extends Pick<OwnerType, "firstName" | "email"> {
-  id: string;
-  accessToken: string;
+interface UserType {
+  token: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+  };
 }
 
 export { ownerSchema, signInSchema };
