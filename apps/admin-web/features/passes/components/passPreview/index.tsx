@@ -4,6 +4,8 @@ import { useFormContext } from "react-hook-form";
 import { AppleIcon } from "@lynkeer/ui/components/apple-icon";
 import { GoogleIcon } from "@lynkeer/ui/components/google-icon";
 import { Tabs, TabsList, TabsTrigger } from "@lynkeer/ui/components/tabs";
+
+import { useGetPassTypes } from "@/features/passes/hooks/useGetPassTypes";
 import { PassContainer } from "./passContainer";
 import { PassFields } from "./passFields";
 import { PassGoogleTitle } from "./passGoogleTitle";
@@ -16,13 +18,19 @@ function PassPreview() {
   const { watch } = useFormContext();
   const formData = watch();
   const [walletProvider, setWalletProvider] = useState<"apple" | "google">("apple");
+  const { isLoading: isLoadingPassTypes } = useGetPassTypes();
 
   const handleChangeWalletProvider = (value: string) => {
     setWalletProvider(value as "apple" | "google");
   };
 
-  if (Object.values(formData).every((value) => value === "")) {
-    return <PassSkeleton />;
+  // Show skeleton while pass types are loading or form data is empty
+  if (isLoadingPassTypes || Object.values(formData).every((value) => value === "")) {
+    return (
+      <section className="sticky top-6">
+        <PassSkeleton />
+      </section>
+    );
   }
 
   return (

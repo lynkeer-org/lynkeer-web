@@ -1,5 +1,6 @@
 import { baseAppUrlEnv } from "@/lib/utils/environmentValues";
 import {
+  appleCertPasswordEnv,
   appleCertificatePemBase64Env,
   appleKeyPemBase64Env,
   appleWwdrPemBase64Env,
@@ -10,7 +11,7 @@ export async function createLoyaltyPass(_storeName: string): Promise<Buffer> {
     wwdr: Buffer.from(appleWwdrPemBase64Env || "", "base64"),
     signerCert: Buffer.from(appleCertificatePemBase64Env || "", "base64"),
     signerKey: Buffer.from(appleKeyPemBase64Env || "", "base64"),
-    signerKeyPassphrase: process.env.APPLE_CERT_PASSWORD || "",
+    signerKeyPassphrase: appleCertPasswordEnv || "",
   };
 
   const { PKPass } = await import("passkit-generator");

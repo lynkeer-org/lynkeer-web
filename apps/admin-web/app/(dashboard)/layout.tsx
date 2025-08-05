@@ -28,7 +28,7 @@ export default async function LayoutDashboard({ children }: Props) {
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" />
+      <AppSidebar variant="inset" user={session.user} />
 
       <SidebarInset>
         <SiteHeader />

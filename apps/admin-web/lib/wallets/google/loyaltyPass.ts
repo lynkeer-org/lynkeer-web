@@ -1,3 +1,8 @@
+import {
+  googleWalletClientEmailEnv,
+  googleWalletIssuerIdEnv,
+  googleWalletPrivateKeyEnv,
+} from "@/lib/utils/environmentValues";
 import { google } from "googleapis";
 import jwt from "jsonwebtoken";
 
@@ -14,15 +19,15 @@ export class LoyaltyPass {
   private issuerId: string;
 
   constructor() {
-    const clientEmail = process.env.GOOGLE_WALLET_CLIENT_EMAIL as string;
-    const privateKey = process.env.GOOGLE_WALLET_PRIVATE_KEY?.replace(/\\n/g, "\n") as string;
+    const clientEmail = googleWalletClientEmailEnv as string;
+    const privateKey = googleWalletPrivateKeyEnv?.replace(/\\n/g, "\n") as string;
 
     this.credentials = {
       client_email: clientEmail,
       private_key: privateKey,
     };
 
-    this.issuerId = process.env.GOOGLE_WALLET_ISSUER_ID as string;
+    this.issuerId = googleWalletIssuerIdEnv as string;
 
     const auth = new google.auth.JWT({
       email: clientEmail,

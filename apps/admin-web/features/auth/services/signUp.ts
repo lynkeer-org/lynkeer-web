@@ -4,7 +4,7 @@ import { publicApi } from "@/lib/axios/publicApi";
 
 async function signUpRequest(data: OwnerType) {
   try {
-    const response = await publicApi.post("/auth/sign-up", data);
+    const response = await publicApi.post("/v1/sign-up", data);
 
     return { status: response.status };
   } catch (error) {

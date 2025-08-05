@@ -17,14 +17,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@lynkeer/ui/components/sidebar";
+import type { User } from "next-auth";
 import Link from "next/link";
 
 const data = {
-  user: {
-    name: "Andres",
-    email: "andres.valencia@lynkeer.com",
-  },
-
   navMain: [
     {
       title: "Reportes",
@@ -52,9 +48,17 @@ const data = {
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+interface AppSidebarProps {
+  user: User;
+  variant?: "sidebar" | "floating" | "inset";
+  side?: "left" | "right";
+  collapsible?: "none" | "icon" | "offcanvas";
+  className?: string;
+}
+
+export function AppSidebar({ user, variant, side, collapsible = "icon", className }: AppSidebarProps) {
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar collapsible={collapsible} variant={variant} side={side} className={className}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -74,7 +78,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
 
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>
   );
