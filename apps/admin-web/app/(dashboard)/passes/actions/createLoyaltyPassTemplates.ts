@@ -2,9 +2,9 @@
 
 import { getPassFields } from "@/features/passes/lib/passFieldMapper";
 import { templatePassTypes } from "@/features/passes/lib/templatePassType";
-import { createPassTemplateRequest } from "@/features/passes/services/createPassTemplate";
+import { createPassTemplateRequest } from "@/features/passes/services/createPassTemplateRequest";
 import { loyaltyPassSchema } from "@/features/passes/types/loyaltyPassSchema";
-import type { CreatePassTemplateType, LoyaltyPassType } from "@/features/passes/types/loyaltyPassSchema";
+import type { LoyaltyPassType, PassTemplateType } from "@/features/passes/types/loyaltyPassSchema";
 import { passTypeIdentifierEnv } from "@/lib/utils/environmentValues";
 import { googleCreateLoyaltyClass } from "@/lib/wallets/google/googleCreateLoyaltyClass";
 import { HttpStatusCode } from "axios";
@@ -23,7 +23,7 @@ async function createLoyaltyPassTemplates(form: LoyaltyPassType) {
 
     const passFields = getPassFields(data, templatePassTypes.loyaltyPassType);
 
-    const passTemplateData: CreatePassTemplateType = {
+    const passTemplateData: PassTemplateType = {
       title: data.passName,
       stampGoal: data.stampGoal.toString(),
       logoUrl: data.logoUrl,

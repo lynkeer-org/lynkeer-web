@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 
 import type React from "react";
 
-import { AppSidebar } from "@/components/app-sidebar";
-import { SiteHeader } from "@/components/site-header";
+import { AppSidebar } from "@/components/AppSidebar";
+import { SiteHeader } from "@/components/SiteHeader";
 import { SidebarInset, SidebarProvider } from "@lynkeer/ui/components/sidebar";
 
 interface Props {

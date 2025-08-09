@@ -13,7 +13,7 @@ const loyaltyPassSchema = z.object({
 });
 type LoyaltyPassType = z.infer<typeof loyaltyPassSchema>;
 
-interface CreatePassTemplateType {
+interface PassTemplateType {
   title: string;
   stampGoal: string;
   logoUrl: string;
@@ -25,9 +25,13 @@ interface CreatePassTemplateType {
   passTypeId: string;
 }
 
-interface CreatePassTemplateResponse extends CreatePassTemplateType {
+interface CreatePassTemplateResponse extends PassTemplateType {
   id: string;
+}
+interface GetPassTemplateResponse extends PassTemplateType {
+  id: string;
+  ownerId: string;
 }
 
 export { loyaltyPassSchema };
-export type { LoyaltyPassType, CreatePassTemplateType, CreatePassTemplateResponse };
+export type { LoyaltyPassType, PassTemplateType, CreatePassTemplateResponse, GetPassTemplateResponse };

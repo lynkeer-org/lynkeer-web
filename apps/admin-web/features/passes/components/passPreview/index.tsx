@@ -1,31 +1,35 @@
+import { Tabs, TabsList, TabsTrigger } from "@lynkeer/ui/components/tabs";
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
 
 import { AppleIcon } from "@lynkeer/ui/components/apple-icon";
 import { GoogleIcon } from "@lynkeer/ui/components/google-icon";
-import { Tabs, TabsList, TabsTrigger } from "@lynkeer/ui/components/tabs";
 
-import { useGetPassTypes } from "@/features/passes/hooks/useGetPassTypes";
-import { PassContainer } from "./passContainer";
-import { PassFields } from "./passFields";
-import { PassGoogleTitle } from "./passGoogleTitle";
-import { PassHeader } from "./passHeader";
-import { PassQrcode } from "./passQrcode";
-import { PassSkeleton } from "./passSkeleton";
-import { PassStrip } from "./passStrip";
+import { PassContainer } from "./PassContainer";
+import { PassFields } from "./PassFields";
+import { PassGoogleTitle } from "./PassGoogleTitle";
+import { PassHeader } from "./PassHeader";
+import { PassQrcode } from "./PassQrcode";
+import { PassSkeleton } from "./PassSkeleton";
+import { PassStrip } from "./PassStrip";
 
-function PassPreview() {
-  const { watch } = useFormContext();
-  const formData = watch();
+interface PassPreviewProps {
+  isLoading: boolean;
+  backgroundColor: string;
+  textColor: string;
+  logoUrl: string;
+  passName: string;
+  stampGoal: number | string;
+}
+
+function PassPreview({ isLoading, backgroundColor, textColor, logoUrl, passName, stampGoal }: PassPreviewProps) {
   const [walletProvider, setWalletProvider] = useState<"apple" | "google">("apple");
-  const { isLoading: isLoadingPassTypes } = useGetPassTypes();
 
   const handleChangeWalletProvider = (value: string) => {
     setWalletProvider(value as "apple" | "google");
   };
 
-  // Show skeleton while pass types are loading or form data is empty
-  if (isLoadingPassTypes || Object.values(formData).every((value) => value === "")) {
+  // Show skeleton while loading
+  if (isLoading) {
     return (
       <section className="sticky top-6">
         <PassSkeleton />
@@ -36,13 +40,13 @@ function PassPreview() {
   return (
     <section className="sticky top-6">
       {/* Pass Preview */}
-      <PassContainer backgroundColor={formData.backgroundColor} textColor={formData.textColor}>
-        <PassHeader logoUrl={formData.logoUrl} passName={formData.passName} />
-        {walletProvider === "google" && <PassGoogleTitle title={formData.passName} />}
-        {walletProvider === "apple" && <PassStrip stampGoal={formData.stampGoal} />}
+      <PassContainer backgroundColor={backgroundColor} textColor={textColor}>
+        <PassHeader logoUrl={logoUrl} passName={passName} />
+        {walletProvider === "google" && <PassGoogleTitle title={passName} />}
+        {walletProvider === "apple" && <PassStrip stampGoal={String(stampGoal)} />}
         <PassFields />
-        <PassQrcode value={formData.passName} />
-        {walletProvider === "google" && <PassStrip stampGoal={formData.stampGoal} />}
+        <PassQrcode value={passName} />
+        {walletProvider === "google" && <PassStrip stampGoal={String(stampGoal)} />}
       </PassContainer>
 
       {/* Wallet selector */}

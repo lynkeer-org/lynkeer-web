@@ -1,6 +1,6 @@
 import { Skeleton } from "@lynkeer/ui/components/skeleton";
-import { ByLynkeer } from "./byLynkeer";
-import { PassContainer } from "./passContainer";
+import { ByLynkeer } from "./ByLynkeer";
+import { PassContainer } from "./PassContainer";
 import "./styles.css";
 
 const PassSkeleton = () => {
