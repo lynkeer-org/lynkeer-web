@@ -11,7 +11,7 @@ import { Button } from "@lynkeer/ui/components/button";
 import { Input } from "@lynkeer/ui/components/input";
 import { Label } from "@lynkeer/ui/components/label";
 
-import { FormSkeleton } from "@/features/passes/components/formSkeleton";
+import { FormSkeleton } from "@/features/passes/components/FormSkeleton";
 import { useCreatePassTemplates } from "@/features/passes/hooks/useCreatePassTemplates";
 import { useGetPassTypes } from "@/features/passes/hooks/useGetPassTypes";
 import { useErrorHandler } from "@/hooks/useErrorHandler";

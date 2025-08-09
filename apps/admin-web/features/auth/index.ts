@@ -1,2 +1,2 @@
-export { SignUpForm } from "./components/signUpForm";
-export { SignInForm } from "./components/signInForm";
+export { SignUpForm } from "./components/SignUpForm";
+export { SignInForm } from "./components/SignInForm";

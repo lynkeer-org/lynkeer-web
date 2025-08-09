@@ -1,4 +1,4 @@
-import { StampGrid } from "@/features/passes/components/stampGrid";
+import { StampGrid } from "@/features/passes/components/StampGrid";
 import "./styles.css";
 
 interface PassStripProps {

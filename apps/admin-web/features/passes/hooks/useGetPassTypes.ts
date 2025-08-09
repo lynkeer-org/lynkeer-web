@@ -13,10 +13,10 @@ export function useGetPassTypes() {
       const response = await getPassTypes();
       return response.data;
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 10 * 60 * 1000, // 10 minutes
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
+    staleTime: 5 * 60 * 1000, // 5 minutes fresh data
+    gcTime: 10 * 60 * 1000, // 10 minutes data is kept in the cache after unmount
+    refetchOnWindowFocus: false, // don't refetch on window focus
+    refetchOnMount: false, // don't refetch on mount
     retry: 1,
   });
 }

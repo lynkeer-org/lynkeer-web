@@ -13,7 +13,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@lynk
 import { Input } from "@lynkeer/ui/components/input";
 import { Label } from "@lynkeer/ui/components/label";
 
-import { InputPassword } from "@/features/auth/components/inputPassword";
+import { InputPassword } from "@/features/auth/components/InputPassword";
 
 import { signInAction } from "@/app/auth/actions/signIn";
 import type { SignInType } from "@/features/auth/types/auth";

@@ -1,13 +1,10 @@
 "use server";
 
-import { getPassTypesRequest } from "@/features/passes/services/getPassTypesRequest";
+import { getPassTemplateRequest } from "@/features/passes/services/getPassTemplateRequest";
 import { HttpStatusCode } from "axios";
 
-/**
- * Server Action to fetch pass types
- */
-export async function getPassTypes() {
-  const response = await getPassTypesRequest();
+export async function getPassTemplate(passUuid: string) {
+  const response = await getPassTemplateRequest(passUuid);
 
   if (response.error) {
     throw new Error(response.error.message, { cause: response.error });

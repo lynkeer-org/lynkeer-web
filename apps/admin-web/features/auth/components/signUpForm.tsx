@@ -14,7 +14,7 @@ import { Label } from "@lynkeer/ui/components/label";
 import { PhoneInput } from "@lynkeer/ui/components/phoneInput";
 
 import { signUpAction } from "@/app/auth/actions/signUp";
-import { InputPassword } from "@/features/auth/components/inputPassword";
+import { InputPassword } from "@/features/auth/components/InputPassword";
 import { ownerSchema } from "@/features/auth/types/auth";
 
 import type { OwnerType } from "@/features/auth/types/auth";

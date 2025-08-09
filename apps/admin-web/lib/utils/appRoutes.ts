@@ -5,6 +5,7 @@ export const reportsRoutes = {
 export const passesRoutes = {
   ROOT: "/passes",
   CREATE: "/passes/create",
+  DETAILS: "/passes/:passUuid",
 };
 
 export const clientsDataRoutes = {

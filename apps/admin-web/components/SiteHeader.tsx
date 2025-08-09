@@ -1,6 +1,6 @@
 "use client";
 
-import { AppBreadcrumb } from "@/components/app-breadcrumb";
+import { AppBreadcrumb } from "@/components/AppBreadcrumb";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 import { sidebarStorage } from "@/lib/localStorage/sidebarStorage";
 import { ModeToggle } from "@lynkeer/ui/components/modeToggle";

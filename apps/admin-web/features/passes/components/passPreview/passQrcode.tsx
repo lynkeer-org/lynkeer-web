@@ -1,5 +1,5 @@
 import { QRCodeSVG } from "qrcode.react";
-import { ByLynkeer } from "./byLynkeer";
+import { ByLynkeer } from "./ByLynkeer";
 import "./styles.css";
 
 interface PassQrcodeProps {

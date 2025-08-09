@@ -1,5 +1,5 @@
 import type { SignInType } from "@/features/auth/types/auth";
-import type { CreatePassTemplateType } from "@/features/passes/types/loyaltyPassSchema";
+import type { PassTemplateType } from "@/features/passes/types/loyaltyPassSchema";
 import { baseUrlApiEnv } from "@/lib/utils/environmentValues";
 import { http, HttpResponse } from "msw";
 
@@ -30,7 +30,7 @@ export const handlers = [
   }),
 
   http.post(`${API}/api/v1/pass/template/create`, async ({ request }) => {
-    const body = (await request.json()) as CreatePassTemplateType;
+    const body = (await request.json()) as PassTemplateType;
 
     if (body.title === "test") {
       return HttpResponse.json({ uuid: "1234567890" }, { status: 201 });

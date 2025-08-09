@@ -3,9 +3,9 @@
 import { IconChartBarPopular, IconHelp, IconPlayCardStar, IconUsers } from "@tabler/icons-react";
 import type * as React from "react";
 
-import { NavMain } from "@/components/nav-main";
-import { NavSecondary } from "@/components/nav-secondary";
-import { NavUser } from "@/components/nav-user";
+import { NavMain } from "@/components/NavMain";
+import { NavSecondary } from "@/components/NavSecondary";
+import { NavUser } from "@/components/NavUser";
 import { LogoIcon } from "@lynkeer/ui/components/logoIcon";
 import { LogoName } from "@lynkeer/ui/components/logoName";
 import {

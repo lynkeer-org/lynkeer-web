@@ -1,9 +1,9 @@
 import { errorTypes } from "@/features/passes/lib/errorTypes";
-import type { CreatePassTemplateResponse, CreatePassTemplateType } from "@/features/passes/types/loyaltyPassSchema";
+import type { CreatePassTemplateResponse, PassTemplateType } from "@/features/passes/types/loyaltyPassSchema";
 import { privateApi } from "@/lib/axios/privateApi";
 import { redirectToSignOut } from "@/lib/axios/requestValidation";
 
-async function createPassTemplateRequest(data: CreatePassTemplateType) {
+async function createPassTemplateRequest(data: PassTemplateType) {
   try {
     const response = await privateApi.post<CreatePassTemplateResponse>("/v1/pass-template", data);
     return { status: response.status, data: response.data };

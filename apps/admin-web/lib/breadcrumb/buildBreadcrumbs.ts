@@ -1,5 +1,5 @@
+import { getRouteInfo } from "../utils/appRoutesConfig";
 import { normalizePath } from "./normalize";
-import { routesConfig } from "./routes-config";
 import type { BreadcrumbItemType } from "./types";
 
 export function buildBreadcrumbs(pathname: string): BreadcrumbItemType[] {
@@ -13,8 +13,10 @@ export function buildBreadcrumbs(pathname: string): BreadcrumbItemType[] {
     .map((_, index, array) => `/${array.slice(0, index + 1).join("/")}`);
 
   for (const segment of segments) {
-    if (routesConfig.has(segment)) {
-      breadcrumbs.push({ path: segment, label: routesConfig.get(segment) as string });
+    const { exists, label } = getRouteInfo(segment);
+
+    if (exists && label) {
+      breadcrumbs.push({ path: segment, label });
     }
   }
 
