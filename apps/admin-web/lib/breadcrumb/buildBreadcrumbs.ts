@@ -1,4 +1,4 @@
-import { getRouteInfo } from "../utils/appRoutesConfig";
+import { getRouteInfo } from "@/lib/utils/appRoutesConfig";
 import { normalizePath } from "./normalize";
 import type { BreadcrumbItemType } from "./types";
 

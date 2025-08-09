@@ -14,12 +14,12 @@ import { Label } from "@lynkeer/ui/components/label";
 import { PhoneInput } from "@lynkeer/ui/components/phoneInput";
 
 import { signUpAction } from "@/app/auth/actions/signUp";
-import { InputPassword } from "@/features/auth/components/InputPassword";
+import { InputPassword } from "@/features/auth/components/InputPassword_v2";
 import { ownerSchema } from "@/features/auth/types/auth";
 
+import { errorTypes } from "@/features/auth/lib/errorTypes";
 import type { OwnerType } from "@/features/auth/types/auth";
 import type { SubmitHandler } from "react-hook-form";
-import { errorTypes } from "../lib/errorTypes";
 
 export function SignUpForm() {
   const [loading, setLoading] = useState(false);

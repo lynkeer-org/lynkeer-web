@@ -1,4 +1,4 @@
-import { StampGrid } from "@/features/passes/components/StampGrid";
+import { StampGrid } from "@/features/passes/components/StampGrid_v2";
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
