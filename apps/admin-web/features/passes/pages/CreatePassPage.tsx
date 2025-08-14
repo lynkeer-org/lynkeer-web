@@ -6,7 +6,7 @@ import { loyaltyPassSchema } from "@/features/passes/types/loyaltyPassSchema";
 import type { LoyaltyPassType } from "@/features/passes/types/loyaltyPassSchema";
 
 import { LoadingPage } from "@/components/LoadingPage";
-import { PassForm } from "@/features/passes/components/PassForm_v2";
+import { PassForm } from "@/features/passes/components/PassForm";
 import { PassPreview } from "@/features/passes/components/PassPreview";
 import { useGetPassTypes } from "@/features/passes/hooks/useGetPassTypes";
 import { defaultLogoUrlEnv } from "@/lib/utils/environmentValues";
