@@ -1,9 +1,9 @@
 import { QRCodeSVG } from "qrcode.react";
 
+import { ByLynkeer } from "@/features/passes/components/PassPreview/ByLynkeer";
 import { baseAppUrlEnv } from "@/lib/utils/environmentValues";
 import { Button } from "@lynkeer/ui/components/button";
 import { toast } from "sonner";
-import { ByLynkeer } from "./PassPreview/ByLynkeer";
 
 interface ActivationInfoProps {
   passUuid: string;

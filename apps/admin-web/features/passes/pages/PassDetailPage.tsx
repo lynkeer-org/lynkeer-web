@@ -67,7 +67,7 @@ function PassDetailPage({ passUuid }: PassDetailPageProps) {
       {isMobile ? (
         <Tabs className="px-2" defaultValue="activation-links">
           <TabsList className="w-full">
-            <TabsTrigger value="activation-links">Enlaces de activación</TabsTrigger>
+            <TabsTrigger value="activation-links">Activación</TabsTrigger>
             <TabsTrigger value="pass-preview">Tarjeta</TabsTrigger>
           </TabsList>
 

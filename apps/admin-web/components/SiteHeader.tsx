@@ -28,7 +28,9 @@ export function SiteHeader() {
 
         <Separator orientation="vertical" className="mx-2 data-[orientation=vertical]:h-4" />
 
-        <AppBreadcrumb items={breadcrumbs} />
+        <div className="min-w-0 flex-1 overflow-hidden">
+          <AppBreadcrumb items={breadcrumbs} />
+        </div>
 
         <div className="ml-auto flex items-center gap-2">
           <ModeToggle />
