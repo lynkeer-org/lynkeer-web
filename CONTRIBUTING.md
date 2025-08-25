@@ -13,7 +13,6 @@ We use a simple and effective branching model, inspired by Git Flow.
 | Branch | Purpose |
 |--------|---------|
 | `main` | Production-ready, live code. Always stable. |
-| `staging` | Pre-production testing environment. |
 | `develop` | Latest integrated development work. |
 | `feature/*` | New features, improvements, or bug fixes under development. |
 | `hotfix/*` | Urgent patches directly for production issues. |
@@ -23,7 +22,7 @@ We use a simple and effective branching model, inspired by Git Flow.
 The following branches are protected:
 |Branch | Protection|
 |-------|-----------|
-|main, staging, develop | ✅ Protected - No direct pushes allowed|
+|main, develop | ✅ Protected - No direct pushes allowed|
 
 #### Protection rules include:
 - All changes must go through Pull Requests (PRs).
@@ -57,16 +56,13 @@ git checkout -b feature/your-branch-name
 2. Implement your changes.
 3. Open a Pull Request into develop.
 4. After approval, merge into develop.
-5. Periodically, merge develop into staging for testing.
-6. Once staging is fully validated, merge staging into main.
+6. Once develop is fully validated, merge develop into main.
 
 ### Visual Flow
 ```bash
 feature/* → Pull Request → develop
                       ↓
-(develop) → Pull Request → staging
-                      ↓
-(staging) → Pull Request → main
+(develop) → Pull Request → main
 ```
 <br>
 
@@ -90,7 +86,6 @@ Hotfixes address critical production issues quickly and safely.
     - Mark it as Hotfix in the PR title or labels.
 4. After merging into main, create two more Pull Requests:
     - From main → develop
-    - From main → staging
 5. Merge these PRs after review.
 
 ### Visual Flow
@@ -99,7 +94,6 @@ Hotfixes address critical production issues quickly and safely.
 hotfix/* → Pull Request → main
                     ↓
 (main) → Pull Request → develop
-(main) → Pull Request → staging
 ```
 <br>
 

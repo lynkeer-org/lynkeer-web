@@ -19,7 +19,7 @@ const fontMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lynkeer",
+  title: "Lynkeer | Admin",
 };
 
 if (apiMockingEnv === "enabled") {

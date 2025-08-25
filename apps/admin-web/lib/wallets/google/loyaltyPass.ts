@@ -81,6 +81,7 @@ export class LoyaltyPass {
   formatObjectForWallet(user: {
     objectSuffix: string;
     classId: string;
+    customerUuid: string;
     name: string;
     email: string;
     urlImageStamps: string;
@@ -102,7 +103,7 @@ export class LoyaltyPass {
       },
       barcode: {
         type: "qrCode",
-        value: user.objectSuffix,
+        value: user.customerUuid,
       },
       textModulesData: [
         {

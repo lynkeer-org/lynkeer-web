@@ -44,8 +44,14 @@ function CardForm() {
 
       window.open(objectResponse.data.url, "_blank");
 
-      // const response = await internalApi.get(`/wallet/apple/loyaltyPass?storeName=${data.passName}`);
-      window.open(`/api/wallet/apple/loyaltyPass?storeName=${data.passName}`, "_blank", "noopener");
+      // OPCIÓN B: Usando URLSearchParams (más simple)
+      const params = new URLSearchParams({
+        storeName: data.passName,
+        userId: "12345",
+        userEmail: "afvalenciab@gmail.com",
+        userName: "Andres Valencia",
+      });
+      window.open(`/api/wallet/apple/loyaltyPass?${params.toString()}`, "_blank", "noopener");
     } catch (_error) {
       // TODO: Handle error
     }

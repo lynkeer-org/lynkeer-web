@@ -1,4 +1,5 @@
 import { baseUrlApiEnv } from "@/lib/utils/environmentValues";
+import { serviceTokenEnv } from "@/lib/utils/environmentValues";
 import axios from "axios";
 import camelCaseKeys from "camelcase-keys";
 import snakeCaseKeys from "snakecase-keys";
@@ -46,4 +47,13 @@ const internal = axios.create({
   },
 });
 
-export { base, internal };
+const service = axios.create({
+  baseURL: `${baseUrlApiEnv}/api`,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${serviceTokenEnv}`,
+    // Authorization: `ApiKey ${serviceTokenEnv}`,
+  },
+});
+
+export { base, internal, service };

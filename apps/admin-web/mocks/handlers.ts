@@ -1,4 +1,5 @@
 import type { SignInType } from "@/features/auth/types/auth";
+import type { CreateCustomerRequest } from "@/features/customer/types/customer";
 import type { PassTemplateType } from "@/features/passes/types/loyaltyPassSchema";
 import { baseUrlApiEnv } from "@/lib/utils/environmentValues";
 import { http, HttpResponse } from "msw";
@@ -37,5 +38,27 @@ export const handlers = [
     }
 
     return HttpResponse.json({ error: "PASS_TEMPLATE_ALREADY_EXISTS" }, { status: 409 });
+  }),
+
+  http.post(`${API}/api/v1/customer`, async ({ request }) => {
+    const body = (await request.json()) as CreateCustomerRequest;
+
+    if (body.email === "test@customer.com") {
+      return HttpResponse.json({ error: "CUSTOMER_ALREADY_EXISTS" }, { status: 409 });
+    }
+
+    const mockCustomer = {
+      id: `customer-${Math.random().toString(36).substring(2, 15)}`,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      phone: body.phone,
+      email: body.email,
+      birthDate: body.birthDate,
+      deviceType: body.deviceType,
+      registrationMethod: body.registrationMethod,
+      createdAt: new Date().toISOString(),
+    };
+
+    return HttpResponse.json(mockCustomer, { status: 201 });
   }),
 ];
