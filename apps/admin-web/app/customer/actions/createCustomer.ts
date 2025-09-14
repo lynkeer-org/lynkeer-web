@@ -2,11 +2,11 @@
 
 import { createCustomerRequest } from "@/features/customer/services/createCustomerRequest";
 import { customerSchema } from "@/features/customer/types/customer";
-import type { CreateCustomerRequest, CustomerType } from "@/features/customer/types/customer";
+import type { CreateCustomerRequest } from "@/features/customer/types/customer";
 import { startClient } from "@/mocks/startClient";
 import { HttpStatusCode } from "axios";
 
-async function createCustomer(form: CustomerType) {
+async function createCustomer(form: CreateCustomerRequest) {
   startClient();
   const validatedFields = customerSchema.safeParse(form);
 
@@ -23,8 +23,6 @@ async function createCustomer(form: CustomerType) {
       phone: data.phone,
       email: data.email,
       birthDate: data.birthDate,
-      deviceType: data.deviceType,
-      registrationMethod: data.registrationMethod,
     };
 
     const response = await createCustomerRequest(customerData);

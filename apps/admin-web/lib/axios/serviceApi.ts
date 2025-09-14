@@ -5,7 +5,7 @@ import { serviceTokenEnv } from "@/lib/utils/environmentValues";
 const serviceApi = base.create({
   headers: {
     ...base.defaults.headers,
-    Authorization: `Bearer ${serviceTokenEnv}`,
+    Authorization: `Bearer ${serviceTokenEnv}`, // TODO: Cambiar a ApiKey
   },
 });
 

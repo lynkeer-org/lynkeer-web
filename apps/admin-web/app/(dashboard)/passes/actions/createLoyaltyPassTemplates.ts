@@ -19,8 +19,6 @@ async function createLoyaltyPassTemplates(form: LoyaltyPassType) {
   const data = validatedFields.data;
 
   try {
-    const { classId: googleClassId } = await googleCreateLoyaltyClass(data);
-
     const passFields = getPassFields(data, templatePassTypes.loyaltyPassType);
 
     const passTemplateData: PassTemplateType = {
@@ -29,7 +27,7 @@ async function createLoyaltyPassTemplates(form: LoyaltyPassType) {
       logoUrl: data.logoUrl,
       textColor: data.textColor,
       backgroundColor: data.backgroundColor,
-      googleClassId: googleClassId,
+      // googleClassId: googleClassId,
       applePassTypeIdentifier: passTypeIdentifierEnv ?? "",
       passTypeId: data.passTypeId,
       passField: passFields,
@@ -41,8 +39,19 @@ async function createLoyaltyPassTemplates(form: LoyaltyPassType) {
       throw new Error(response.error.message, { cause: response.error });
     }
 
+    const { classId: _googleClassId } = await googleCreateLoyaltyClass(data, response.data.id);
+
+    // Update pass template with googleClassId
+    // const responseUpdate = await updatePassTemplate(response.data.id, { googleClassId });
+    // if (responseUpdate.error) {
+    //   throw new Error(responseUpdate.error.message, { cause: responseUpdate.error });
+    // }
+
     return { success: response.status === HttpStatusCode.Created, id: response.data.id };
   } catch (error) {
+    // Delete pass template if error
+    // await deletePassTemplate(response.data.id);
+
     throw new Error("Failed to create pass templates. Please try again.", { cause: error });
   }
 }

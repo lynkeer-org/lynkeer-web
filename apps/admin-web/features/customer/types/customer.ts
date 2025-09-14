@@ -9,20 +9,15 @@ const customerSchema = z.object({
   deviceType: z.enum(["ios", "android", "web"], { required_error: "Tipo de dispositivo es requerido" }),
   registrationMethod: z.enum(["manual", "qr_scan", "link"], { required_error: "Método de registro es requerido" }),
 });
-
-type CustomerType = z.infer<typeof customerSchema>;
-
 interface CreateCustomerRequest {
   firstName: string;
   lastName: string;
   phone: string;
   email: string;
   birthDate: string;
-  deviceType: "ios" | "android" | "web";
-  registrationMethod: "manual" | "qr_scan" | "link";
 }
 
-interface CreateCustomerResponse {
+interface CustomerResponse {
   id: string;
   firstName: string;
   lastName: string;
@@ -40,4 +35,4 @@ interface CustomerError {
 }
 
 export { customerSchema };
-export type { CustomerType, CreateCustomerRequest, CreateCustomerResponse, CustomerError };
+export type { CreateCustomerRequest, CustomerResponse, CustomerError };

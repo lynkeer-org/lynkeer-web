@@ -1,9 +1,9 @@
 const CREATE_CUSTOMER_ERROR = "create_customer_error";
-const CUSTOMER_ALREADY_EXISTS = "customer_already_exists";
-const INVALID_CUSTOMER_DATA = "invalid_customer_data";
+const GET_CUSTOMER_BY_EMAIL_ERROR = "get_customer_by_email_error";
+const CREATE_CUSTOMER_PASS_ERROR = "create_customer_pass_error";
 
 export const errorTypes = {
   CREATE_CUSTOMER_ERROR,
-  CUSTOMER_ALREADY_EXISTS,
-  INVALID_CUSTOMER_DATA,
+  GET_CUSTOMER_BY_EMAIL_ERROR,
+  CREATE_CUSTOMER_PASS_ERROR,
 };

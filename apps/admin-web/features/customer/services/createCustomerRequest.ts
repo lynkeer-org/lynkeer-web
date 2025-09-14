@@ -1,14 +1,12 @@
 import { errorTypes } from "@/features/customer/lib/errorTypes";
-import type { CreateCustomerRequest, CreateCustomerResponse } from "@/features/customer/types/customer";
-import { privateApi } from "@/lib/axios/privateApi";
-import { redirectToSignOut } from "@/lib/axios/requestValidation";
+import type { CreateCustomerRequest, CustomerResponse } from "@/features/customer/types/customer";
+import { serviceApi } from "@/lib/axios/serviceApi";
 
 async function createCustomerRequest(data: CreateCustomerRequest) {
   try {
-    const response = await privateApi.post<CreateCustomerResponse>("/v1/customer", data);
+    const response = await serviceApi.post<CustomerResponse>("/v1/customer", data);
     return { status: response.status, data: response.data };
   } catch (error) {
-    redirectToSignOut(error);
     return {
       error: {
         code: errorTypes.CREATE_CUSTOMER_ERROR,

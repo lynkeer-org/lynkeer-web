@@ -19,7 +19,7 @@ interface PassTemplateType {
   logoUrl: string;
   textColor: string;
   backgroundColor: string;
-  googleClassId: string;
+  googleClassId?: string;
   applePassTypeIdentifier: string;
   passField: PassField[];
   passTypeId: string;
@@ -33,5 +33,15 @@ interface GetPassTemplateResponse extends PassTemplateType {
   ownerId: string;
 }
 
+interface LoyaltyUserType {
+  classId: string;
+  customerId: string;
+  name: string;
+  email: string;
+  urlImageStamps: string;
+  stamps: number;
+  rewards: number;
+}
+
 export { loyaltyPassSchema };
-export type { LoyaltyPassType, PassTemplateType, CreatePassTemplateResponse, GetPassTemplateResponse };
+export type { LoyaltyPassType, PassTemplateType, CreatePassTemplateResponse, GetPassTemplateResponse, LoyaltyUserType };

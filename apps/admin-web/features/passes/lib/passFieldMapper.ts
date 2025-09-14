@@ -9,6 +9,7 @@ const passFieldMapper: Record<string, PassFieldConfig[]> = {
 
 export function getPassFields(_data: LoyaltyPassType, passType: string): PassField[] {
   const passFieldsConfigs = passFieldMapper[passType];
+
   if (!passFieldsConfigs) {
     throw new Error(`No se encontraron configuraciones para el tipo de pas: ${passType}`);
   }
