@@ -19,15 +19,21 @@ async function createLoyaltyPassTemplates(form: LoyaltyPassType) {
   const data = validatedFields.data;
 
   try {
-    const passFields = getPassFields(data, templatePassTypes.loyaltyPassType);
+    // 1. Consultar la lista de pass templates,
+    // 2. Validar si el pass template existe, comparando el nombre del pass template.
+    // 3. Si existe regresar error que el titulo debe ser unico.
+    // 4. Si no, continuar con la creación del pass template.
 
+    const { classId: googleClassId } = await googleCreateLoyaltyClass(data);
+
+    const passFields = getPassFields(data, templatePassTypes.loyaltyPassType);
     const passTemplateData: PassTemplateType = {
       title: data.passName,
       stampGoal: data.stampGoal.toString(),
       logoUrl: data.logoUrl,
       textColor: data.textColor,
       backgroundColor: data.backgroundColor,
-      // googleClassId: googleClassId,
+      googleClassId: googleClassId,
       applePassTypeIdentifier: passTypeIdentifierEnv ?? "",
       passTypeId: data.passTypeId,
       passField: passFields,
@@ -39,19 +45,8 @@ async function createLoyaltyPassTemplates(form: LoyaltyPassType) {
       throw new Error(response.error.message, { cause: response.error });
     }
 
-    const { classId: _googleClassId } = await googleCreateLoyaltyClass(data, response.data.id);
-
-    // Update pass template with googleClassId
-    // const responseUpdate = await updatePassTemplate(response.data.id, { googleClassId });
-    // if (responseUpdate.error) {
-    //   throw new Error(responseUpdate.error.message, { cause: responseUpdate.error });
-    // }
-
     return { success: response.status === HttpStatusCode.Created, id: response.data.id };
   } catch (error) {
-    // Delete pass template if error
-    // await deletePassTemplate(response.data.id);
-
     throw new Error("Failed to create pass templates. Please try again.", { cause: error });
   }
 }
