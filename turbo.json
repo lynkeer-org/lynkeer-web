@@ -51,6 +51,29 @@
       "dependsOn": [
         "^rebuild"
       ]
+    },
+    "test": {
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "vitest.config.ts",
+        "vitest.setup.ts"
+      ]
+    },
+    "test:coverage": {
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "vitest.config.ts",
+        "vitest.setup.ts"
+      ],
+      "outputs": [
+        "coverage/**"
+      ]
     }
   },
   "globalEnv": [

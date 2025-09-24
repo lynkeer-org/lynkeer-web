@@ -73,7 +73,7 @@ function PassDetailPage({ passUuid }: PassDetailPageProps) {
 
           <TabsContent value="activation-links">
             <div className="py-4">
-              <ActivationInfo passUuid={passUuid} />
+              <ActivationInfo passTitle={passTemplate?.title} passUuid={passUuid} />
             </div>
           </TabsContent>
 
@@ -83,7 +83,7 @@ function PassDetailPage({ passUuid }: PassDetailPageProps) {
         </Tabs>
       ) : (
         <div className="grid grid-cols-2 gap-4 px-6">
-          <ActivationInfo passUuid={passUuid} />
+          <ActivationInfo passTitle={passTemplate?.title} passUuid={passUuid} />
 
           <div className="flex items-center justify-center">{previewEl}</div>
         </div>

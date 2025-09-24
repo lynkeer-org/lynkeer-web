@@ -22,7 +22,6 @@ async function createLoyaltyPassTemplates(form: LoyaltyPassType) {
     const { classId: googleClassId } = await googleCreateLoyaltyClass(data);
 
     const passFields = getPassFields(data, templatePassTypes.loyaltyPassType);
-
     const passTemplateData: PassTemplateType = {
       title: data.passName,
       stampGoal: data.stampGoal.toString(),

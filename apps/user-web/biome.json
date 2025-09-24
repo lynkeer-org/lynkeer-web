@@ -1,0 +1,6 @@
+{
+  "extends": ["@lynkeer/biome-config/next-js"],
+  "files": {
+    "ignore": [".next", ".turbo", "next-env.d.ts", "public", ".vercel", "coverage", "node_modules"]
+  }
+}

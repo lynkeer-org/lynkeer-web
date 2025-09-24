@@ -1,16 +1,17 @@
 import { QRCodeSVG } from "qrcode.react";
 
 import { ByLynkeer } from "@/features/passes/components/PassPreview/ByLynkeer";
-import { baseAppUrlEnv } from "@/lib/utils/environmentValues";
+import { baseUserAppUrlEnv } from "@/lib/utils/environmentValues";
 import { Button } from "@lynkeer/ui/components/button";
 import { toast } from "sonner";
 
 interface ActivationInfoProps {
+  passTitle?: string;
   passUuid: string;
 }
 
-function ActivationInfo({ passUuid }: ActivationInfoProps) {
-  const activationLink = `${baseAppUrlEnv}/passes/activate/${passUuid}`;
+function ActivationInfo({ passUuid, passTitle = "" }: ActivationInfoProps) {
+  const activationLink = `${baseUserAppUrlEnv}/register/${passUuid}?passTitle=${passTitle}`;
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(activationLink);
