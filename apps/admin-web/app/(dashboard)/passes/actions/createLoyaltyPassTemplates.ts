@@ -19,11 +19,6 @@ async function createLoyaltyPassTemplates(form: LoyaltyPassType) {
   const data = validatedFields.data;
 
   try {
-    // 1. Consultar la lista de pass templates,
-    // 2. Validar si el pass template existe, comparando el nombre del pass template.
-    // 3. Si existe regresar error que el titulo debe ser unico.
-    // 4. Si no, continuar con la creación del pass template.
-
     const { classId: googleClassId } = await googleCreateLoyaltyClass(data);
 
     const passFields = getPassFields(data, templatePassTypes.loyaltyPassType);

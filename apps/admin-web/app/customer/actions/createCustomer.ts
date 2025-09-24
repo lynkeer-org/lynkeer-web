@@ -8,7 +8,7 @@ import { HttpStatusCode } from "axios";
 
 async function createCustomer(form: CreateCustomerRequest) {
   startClient();
-  const validatedFields = customerSchema.safeParse(form);
+  const validatedFields = customerSchema.omit({ deviceType: true, registrationMethod: true }).safeParse(form);
 
   if (!validatedFields.success) {
     throw new Error("Invalid customer data", { cause: validatedFields.error });

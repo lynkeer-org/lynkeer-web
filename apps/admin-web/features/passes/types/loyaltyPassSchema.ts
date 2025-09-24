@@ -19,7 +19,7 @@ interface PassTemplateType {
   logoUrl: string;
   textColor: string;
   backgroundColor: string;
-  googleClassId?: string;
+  googleClassId: string;
   applePassTypeIdentifier: string;
   passField: PassField[];
   passTypeId: string;

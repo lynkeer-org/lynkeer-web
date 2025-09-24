@@ -1,7 +1,7 @@
 import type { SignInType } from "@/features/auth/types/auth";
 import type { CreateCustomerRequest } from "@/features/customer/types/customer";
 import type { CreateCustomerPassRequest } from "@/features/customer/types/customerPass";
-import type { PassTemplateType } from "@/features/passes/types/loyaltyPassSchema";
+import type { GetPassTemplateResponse, PassTemplateType } from "@/features/passes/types/loyaltyPassSchema";
 import { baseUrlApiEnv } from "@/lib/utils/environmentValues";
 import { http, HttpResponse } from "msw";
 
@@ -61,7 +61,7 @@ export const handlers = [
     return HttpResponse.json(mockCustomer, { status: 201 });
   }),
 
-  http.get(`${API}/api/v1/customers/email/:email`, ({ params }) => {
+  http.get(`${API}/api/v1/customer/email/:email`, ({ params }) => {
     const { email } = params;
 
     if (email === "test@customer.com") {
@@ -93,5 +93,38 @@ export const handlers = [
     };
 
     return HttpResponse.json(mockCustomerPass, { status: 201 });
+  }),
+
+  http.get(`${API}/api/v1/pass-template`, () => {
+    const mockPassTemplates: GetPassTemplateResponse[] = [
+      {
+        id: "template-123",
+        ownerId: "owner-123",
+        title: "Coffee Loyalty Card",
+        stampGoal: "10",
+        logoUrl: "https://example.com/logo.png",
+        textColor: "#000000",
+        backgroundColor: "#FFFFFF",
+        applePassTypeIdentifier: "pass.com.lynkeer.coffee",
+        googleClassId: "coffee-123",
+        passField: [],
+        passTypeId: "loyalty-pass",
+      },
+      {
+        id: "template-456",
+        ownerId: "owner-123",
+        title: "Pizza Rewards",
+        stampGoal: "8",
+        logoUrl: "https://example.com/pizza-logo.png",
+        textColor: "#FFFFFF",
+        backgroundColor: "#FF0000",
+        applePassTypeIdentifier: "pass.com.lynkeer.pizza",
+        googleClassId: "pizza-456",
+        passField: [],
+        passTypeId: "loyalty-pass",
+      },
+    ];
+
+    return HttpResponse.json(mockPassTemplates, { status: 200 });
   }),
 ];

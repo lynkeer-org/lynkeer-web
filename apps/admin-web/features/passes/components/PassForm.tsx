@@ -13,6 +13,7 @@ import { Label } from "@lynkeer/ui/components/label";
 
 import { FormSkeleton } from "@/features/passes/components/FormSkeleton";
 import { useCreatePassTemplates } from "@/features/passes/hooks/useCreatePassTemplates";
+import { useGetPassTemplateList } from "@/features/passes/hooks/useGetPassTemplateList";
 import { useGetPassTypes } from "@/features/passes/hooks/useGetPassTypes";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { defaultLogoUrlEnv } from "@/lib/utils/environmentValues";
@@ -24,6 +25,7 @@ function PassForm() {
   const defaultLogoUrl = defaultLogoUrlEnv;
   const { mutate: createPassTemplates, isPending } = useCreatePassTemplates();
   const { data: passTypes, isLoading: isLoadingPassTypes, error: passTypesError } = useGetPassTypes();
+  const { data: passTemplateList, isLoading: isLoadingPassTemplateList } = useGetPassTemplateList();
 
   const {
     register,
@@ -45,6 +47,12 @@ function PassForm() {
   useErrorHandler(passTypesError, "Error al cargar los tipos de pases");
 
   const handleCreatePass: SubmitHandler<LoyaltyPassType> = async (data) => {
+    const passTemplateExists = passTemplateList?.some((template) => template.title.trim() === data.passName.trim());
+    if (passTemplateExists) {
+      toast.error("La tarjeta ya existe, por favor intenta con otro nombre");
+      return;
+    }
+
     try {
       createPassTemplates(data, {
         onSuccess: (response) => {
@@ -100,7 +108,7 @@ function PassForm() {
           <input type="hidden" {...register("passTypeId")} />
         </div>
 
-        <Button loading={isPending} type="submit">
+        <Button loading={isPending || isLoadingPassTemplateList} type="submit">
           Crear
         </Button>
       </div>

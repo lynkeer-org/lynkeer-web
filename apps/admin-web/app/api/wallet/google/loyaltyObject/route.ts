@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
 
     const objectId = await loyaltyPass.createObject(
       {
-        classId: passTemplateData.googleClassId as string,
+        classId: passTemplateData.googleClassId,
         customerId: customerResult.id,
         name: `${userData.firstName} ${userData.lastName}`,
         email: userData.email,
@@ -57,8 +57,8 @@ export async function POST(request: NextRequest) {
       objectSuffix,
     );
 
-    // const jwt = loyaltyPass.generateAddToWalletJwt(objectId);
-    // const saveUrl = loyaltyPass.generateSaveLink(jwt);
+    const jwt = loyaltyPass.generateAddToWalletJwt(objectId);
+    const saveUrl = loyaltyPass.generateSaveLink(jwt);
 
     const customerPassData = {
       customerId: customerResult.id,
@@ -70,8 +70,7 @@ export async function POST(request: NextRequest) {
       // Specific to Google Wallet
       google_id_class: passTemplateData.googleClassId,
       google_id_object: objectId,
-      // google_wallet_url: saveUrl,
-      google_wallet_url: "test_url",
+      google_wallet_url: saveUrl,
     };
 
     const { data: customerPass } = await createCustomerPass(customerPassData);
@@ -80,8 +79,7 @@ export async function POST(request: NextRequest) {
       throw new Error("Failed to create customer pass");
     }
 
-    return NextResponse.json({ url: "test_url" }, { status: 200 });
-    // return NextResponse.json({ url: saveUrl }, { status: 200 });
+    return NextResponse.json({ url: saveUrl }, { status: 200 });
   } catch (error) {
     console.error("Error in loyaltyObject route:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

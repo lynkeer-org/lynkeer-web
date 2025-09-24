@@ -26,7 +26,7 @@ interface RegisterPassFormProps {
 }
 
 function RegisterPassForm({ passUuid }: RegisterPassFormProps) {
-  // const os = detectOS();
+  // const os = detectOS(); TODO: Change to the correct os
   const os = "android";
   const [osDetected, setOsDetected] = useState<string | undefined>();
   const [isAddingPassToAppleWallet, setIsAddingPassToAppleWallet] = useState(false);
