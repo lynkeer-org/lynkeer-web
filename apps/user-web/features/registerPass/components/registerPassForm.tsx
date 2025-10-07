@@ -2,12 +2,12 @@
 
 import { AddWalletBadge } from "@/features/registerPass/components/AddWalletBadge";
 import { Terms } from "@/features/registerPass/components/Terms";
+import { useAddPassToAppleWallet } from "@/features/registerPass/hooks/useAddPassToAppleWallet";
 import { useAddPassToGoogleWallet } from "@/features/registerPass/hooks/useAddPassToGoogleWallet";
 import { registerSchema } from "@/features/registerPass/types/registerTypes";
 import type { RegisterType } from "@/features/registerPass/types/registerTypes";
 import { formatDateOnly } from "@/lib/utils/date";
 import { detectOS } from "@/lib/utils/deviceDetection";
-import { baseAdminAppUrlEnv } from "@/lib/utils/environmentValues";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@lynkeer/ui/components/card";
 import { Checkbox } from "@lynkeer/ui/components/checkbox";
@@ -26,11 +26,10 @@ interface RegisterPassFormProps {
 }
 
 function RegisterPassForm({ passUuid }: RegisterPassFormProps) {
-  // const os = detectOS(); TODO: Change to the correct os
-  const os = "android";
+  const os = detectOS();
   const [osDetected, setOsDetected] = useState<string | undefined>();
-  const [isAddingPassToAppleWallet, setIsAddingPassToAppleWallet] = useState(false);
   const { mutate: addPassToGoogleWallet, isPending: isAddingPassToGoogleWallet } = useAddPassToGoogleWallet();
+  const { mutate: addPassToAppleWallet, isPending: isAddingPassToAppleWallet } = useAddPassToAppleWallet();
 
   const {
     register,
@@ -47,43 +46,80 @@ function RegisterPassForm({ passUuid }: RegisterPassFormProps) {
     return date > new Date();
   };
 
-  const handleRegister: SubmitHandler<RegisterType> = (data) => {
-    try {
-      if (osDetected === "ios") {
-        setIsAddingPassToAppleWallet(true);
-        const params = new URLSearchParams({
-          passUuid,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          phone: data.phone,
-          email: data.email,
-          birthDate: formatDateOnly(data.birthDate),
-        });
+  // Helper function to download Apple pass
+  const downloadApplePass = (binaryArray: number[], filename: string, contentType: string) => {
+    // Convert array of bytes to Uint8Array and create blob
+    const bytes = new Uint8Array(binaryArray);
+    const blob = new Blob([bytes], { type: contentType });
+    const url = URL.createObjectURL(blob);
 
-        window.open(`${baseAdminAppUrlEnv}/api/wallet/apple/loyaltyPass?${params.toString()}`, "_blank", "noopener");
-        setIsAddingPassToAppleWallet(false);
-      } else {
-        addPassToGoogleWallet(
-          {
-            passUuid,
-            data: {
-              ...data,
-              birthDate: formatDateOnly(data.birthDate),
-            },
+    // Create download link
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    link.style.display = "none"; // Hide the link
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Clean up
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 1000);
+  };
+
+  // Helper function to download Google pass
+  const downloadGooglePass = (url: string) => {
+    // Create download link for Google Wallet pass
+    const link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.style.display = "none"; // Hide the link
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleRegister: SubmitHandler<RegisterType> = async (data) => {
+    if (osDetected === "ios") {
+      addPassToAppleWallet(
+        {
+          passUuid,
+          data: {
+            ...data,
+            birthDate: formatDateOnly(data.birthDate),
           },
-          {
-            onSuccess: (response) => {
-              window.open(response.data.url, "_blank");
-            },
-            onError: () => {
-              toast.error("Error al agregar la tarjeta a la wallet, intenta nuevamente");
-            },
+        },
+        {
+          onSuccess: (response) => {
+            downloadApplePass(response.data.binaryArray, response.data.filename, response.data.contentType);
+            toast.success("Pass descargado exitosamente");
           },
-        );
-      }
-    } catch (_error) {
-      setIsAddingPassToAppleWallet(false);
-      toast.error("Error al agregar la tarjeta a la wallet, intenta nuevamente");
+          onError: () => {
+            toast.error("Error al agregar la tarjeta a la wallet, intenta nuevamente");
+          },
+        },
+      );
+    } else {
+      addPassToGoogleWallet(
+        {
+          passUuid,
+          data: {
+            ...data,
+            birthDate: formatDateOnly(data.birthDate),
+          },
+        },
+        {
+          onSuccess: (response) => {
+            downloadGooglePass(response.data.url);
+            toast.success("Pass descargado exitosamente");
+          },
+          onError: () => {
+            toast.error("Error al agregar la tarjeta a la wallet, intenta nuevamente");
+          },
+        },
+      );
     }
   };
 

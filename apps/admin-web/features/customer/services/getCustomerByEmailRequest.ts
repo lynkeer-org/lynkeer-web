@@ -5,7 +5,7 @@ import { AxiosError } from "axios";
 
 async function getCustomerByEmailRequest(email: string) {
   try {
-    const response = await serviceApi.get<CustomerResponse>(`/v1/customer/email/${email}`);
+    const response = await serviceApi.get<CustomerResponse>(`/v1/customers/by-email/${email}`);
     return { status: response.status, data: response.data };
   } catch (error) {
     return {

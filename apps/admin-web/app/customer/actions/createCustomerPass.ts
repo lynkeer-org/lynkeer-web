@@ -2,12 +2,10 @@
 
 import { createCustomerPassRequest } from "@/features/customer/services/createCustomerPassRequest";
 import type { CreateCustomerPassRequest } from "@/features/customer/types/customerPass";
-import { startClient } from "@/mocks/startClient";
+import { startServer } from "@/mocks/startServer";
 import { HttpStatusCode } from "axios";
 
 async function createCustomerPass(data: CreateCustomerPassRequest) {
-  startClient();
-
   try {
     const response = await createCustomerPassRequest(data);
 
