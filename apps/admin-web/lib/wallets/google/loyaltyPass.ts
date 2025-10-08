@@ -6,7 +6,7 @@ import {
 import { google } from "googleapis";
 import jwt from "jsonwebtoken";
 
-import type { LoyaltyPassType, LoyaltyUserType } from "@/features/passes/types/loyaltyPassSchema";
+import type { GoogleLoyaltyUserType, LoyaltyPassType } from "@/features/passes/types/loyaltyPassSchema";
 import type { walletobjects_v1 } from "googleapis";
 
 import { baseUserAppUrlEnv } from "@/lib/utils/environmentValues";
@@ -77,7 +77,7 @@ export class LoyaltyPass {
     return classId;
   }
 
-  async createObject(objectData: LoyaltyUserType, objectSuffix: string): Promise<string> {
+  async createObject(objectData: GoogleLoyaltyUserType, objectSuffix: string): Promise<string> {
     const objectId = `${this.issuerId}.${objectSuffix}`;
 
     try {

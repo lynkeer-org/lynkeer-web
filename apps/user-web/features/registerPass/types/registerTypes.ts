@@ -23,5 +23,22 @@ interface AddPassToGoogleWalletResponse {
   url: string;
 }
 
+interface AddPassToAppleWalletRequest {
+  passUuid: string;
+  data: Omit<RegisterType, "birthDate"> & { birthDate: string };
+}
+
+interface AddPassToAppleWalletResponse {
+  binaryArray: number[];
+  filename: string;
+  contentType: string;
+}
+
 export { registerSchema };
-export type { RegisterType, AddPassToGoogleWalletResponse, AddPassToGoogleWalletRequest };
+export type {
+  RegisterType,
+  AddPassToGoogleWalletResponse,
+  AddPassToGoogleWalletRequest,
+  AddPassToAppleWalletRequest,
+  AddPassToAppleWalletResponse,
+};

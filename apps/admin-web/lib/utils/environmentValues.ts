@@ -9,6 +9,9 @@ const appleWwdrPemBase64 = process.env.APPLE_WWDR_PEM_BASE64;
 const appleCertificatePemBase64 = process.env.APPLE_CERTIFICATE_PEM_BASE64;
 const appleKeyPemBase64 = process.env.APPLE_KEY_PEM_BASE64;
 const appleCertPassword = process.env.APPLE_CERT_PASSWORD;
+const appleTeamIdentifier = process.env.APPLE_TEAM_IDENTIFIER;
+const appleAuthenticationToken = process.env.APPLE_AUTHENTICATION_TOKEN;
+const appleWebServiceURL = process.env.APPLE_WEB_SERVICE_URL;
 
 const googleWalletClientEmail = process.env.GOOGLE_WALLET_CLIENT_EMAIL;
 const googleWalletPrivateKey = process.env.GOOGLE_WALLET_PRIVATE_KEY;
@@ -28,6 +31,9 @@ export const appleWwdrPemBase64Env = appleWwdrPemBase64;
 export const appleCertificatePemBase64Env = appleCertificatePemBase64;
 export const appleKeyPemBase64Env = appleKeyPemBase64;
 export const appleCertPasswordEnv = appleCertPassword;
+export const appleTeamIdentifierEnv = appleTeamIdentifier;
+export const appleAuthenticationTokenEnv = appleAuthenticationToken;
+export const appleWebServiceURLEnv = appleWebServiceURL;
 
 export const googleWalletClientEmailEnv = googleWalletClientEmail;
 export const googleWalletPrivateKeyEnv = googleWalletPrivateKey;

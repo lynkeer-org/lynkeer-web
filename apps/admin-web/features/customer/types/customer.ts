@@ -7,7 +7,7 @@ const customerSchema = z.object({
   email: z.string().email("Email debe ser válido"),
   birthDate: z.string().min(1, "Fecha de nacimiento es requerida"),
   deviceType: z.enum(["ios", "android", "web"], { required_error: "Tipo de dispositivo es requerido" }),
-  registrationMethod: z.enum(["manual", "qr_scan", "link"], { required_error: "Método de registro es requerido" }),
+  registrationMethod: z.enum(["manual", "qr", "link"], { required_error: "Método de registro es requerido" }),
 });
 interface CreateCustomerRequest {
   firstName: string;

@@ -19,9 +19,18 @@ interface PassPreviewProps {
   logoUrl: string;
   passName: string;
   stampGoal: number | string;
+  hideProviderTabs?: boolean;
 }
 
-function PassPreview({ isLoading, backgroundColor, textColor, logoUrl, passName, stampGoal }: PassPreviewProps) {
+function PassPreview({
+  isLoading,
+  backgroundColor,
+  textColor,
+  logoUrl,
+  passName,
+  stampGoal,
+  hideProviderTabs = false,
+}: PassPreviewProps) {
   const [walletProvider, setWalletProvider] = useState<"apple" | "google">("apple");
 
   const handleChangeWalletProvider = (value: string) => {
@@ -49,20 +58,22 @@ function PassPreview({ isLoading, backgroundColor, textColor, logoUrl, passName,
         {walletProvider === "google" && <PassStrip stampGoal={String(stampGoal)} />}
       </PassContainer>
 
-      {/* Wallet selector */}
-      <div className="flex justify-center mt-4">
-        <Tabs value={walletProvider} onValueChange={handleChangeWalletProvider} className="w-fit">
-          <TabsList>
-            <TabsTrigger value="apple" className="p-1 text-sm font-medium leading-none">
-              <AppleIcon className="size-4" />
-            </TabsTrigger>
+      {/* Wallet selector - only show if not hidden */}
+      {!hideProviderTabs && (
+        <div className="flex justify-center mt-4">
+          <Tabs value={walletProvider} onValueChange={handleChangeWalletProvider} className="w-fit">
+            <TabsList>
+              <TabsTrigger value="apple" className="p-1 text-sm font-medium leading-none">
+                <AppleIcon className="size-4" />
+              </TabsTrigger>
 
-            <TabsTrigger value="google" className="p-1 text-sm font-medium leading-none">
-              <GoogleIcon className="size-4" />
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
-      </div>
+              <TabsTrigger value="google" className="p-1 text-sm font-medium leading-none">
+                <GoogleIcon className="size-4" />
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
+      )}
     </section>
   );
 }

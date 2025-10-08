@@ -1,9 +1,7 @@
-import { createCustomer } from "@/app/customer/actions/createCustomer";
+import { getPassTemplate } from "@/app/(dashboard)/passes/actions/getPassTemplate";
 import { createCustomerPass } from "@/app/customer/actions/createCustomerPass";
-import { getCustomerByEmail } from "@/app/customer/actions/getCustomerByEmail";
-import type { CreateCustomerRequest, CustomerResponse } from "@/features/customer/types/customer";
-import type { GetPassTemplateResponse } from "@/features/passes/types/loyaltyPassSchema";
-import { serviceApi } from "@/lib/axios/serviceApi";
+import { handleCustomerFlow } from "@/features/customer/lib/customerFlow";
+import type { CreateCustomerRequest } from "@/features/customer/types/customer";
 import { baseAppUrlEnv } from "@/lib/utils/environmentValues";
 import { LoyaltyPass } from "@/lib/wallets/google/loyaltyPass";
 import type { NextRequest } from "next/server";
@@ -23,21 +21,11 @@ export async function POST(request: NextRequest) {
       birthDate: userData.birthDate,
     };
 
-    let customerResult: CustomerResponse;
-    const existingCustomer = await getCustomerByEmail(userData.email);
+    // Handle customer validation/creation flow
+    const customerResult = await handleCustomerFlow(customerData);
 
-    if (existingCustomer?.data?.id) {
-      customerResult = existingCustomer.data;
-    } else {
-      const { data: newCustomer } = await createCustomer(customerData);
-      customerResult = newCustomer;
-    }
-
-    const { data: passTemplateData } = await serviceApi.get<GetPassTemplateResponse>(`/v1/pass-template/${passUuid}`);
-
-    if (!passTemplateData?.id) {
-      throw new Error("Pass template not found");
-    }
+    // Get pass template data using service API
+    const { data: passTemplateData } = await getPassTemplate(passUuid, "service");
 
     // ObjectSuffix: Unique by customerId (CI) and passTemplateId (PTI) ex: user_CI1234567890_PTI1234567890
     const loyaltyPass = new LoyaltyPass();

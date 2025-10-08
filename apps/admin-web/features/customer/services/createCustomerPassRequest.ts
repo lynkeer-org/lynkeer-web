@@ -4,7 +4,7 @@ import type { CreateCustomerPassRequest, CustomerPassResponse } from "../types/c
 
 async function createCustomerPassRequest(data: CreateCustomerPassRequest) {
   try {
-    const response = await serviceApi.post<CustomerPassResponse>("/v1/customer-pass", data);
+    const response = await serviceApi.post<CustomerPassResponse>("/v1/customer-passes", data);
     return { status: response.status, data: response.data };
   } catch (error) {
     return {
