@@ -41,7 +41,7 @@ export const handlers = [
     return HttpResponse.json({ error: "PASS_TEMPLATE_ALREADY_EXISTS" }, { status: 409 });
   }),
 
-  http.post(`${API}/api/v1/customer`, async ({ request }) => {
+  http.post(`${API}/api/v1/customers`, async ({ request }) => {
     const body = (await request.json()) as CreateCustomerRequest;
 
     if (body.email === "test@customer.com") {
@@ -61,7 +61,7 @@ export const handlers = [
     return HttpResponse.json(mockCustomer, { status: 201 });
   }),
 
-  http.get(`${API}/api/v1/customer/email/:email`, ({ params }) => {
+  http.get(`${API}/api/v1/customers/by-email/:email`, ({ params }) => {
     const { email } = params;
 
     if (email === "test@customer.com") {
@@ -82,7 +82,7 @@ export const handlers = [
     return HttpResponse.json(null, { status: 404 });
   }),
 
-  http.post(`${API}/api/v1/customer-pass`, async ({ request }) => {
+  http.post(`${API}/api/v1/customer-passes`, async ({ request }) => {
     const body = (await request.json()) as CreateCustomerPassRequest;
 
     const mockCustomerPass = {
@@ -107,7 +107,7 @@ export const handlers = [
         backgroundColor: "#FFFFFF",
         applePassTypeIdentifier: "pass.com.lynkeer.coffee",
         googleClassId: "coffee-123",
-        passField: [],
+        passFields: [],
         passTypeId: "loyalty-pass",
       },
       {
@@ -120,7 +120,7 @@ export const handlers = [
         backgroundColor: "#FF0000",
         applePassTypeIdentifier: "pass.com.lynkeer.pizza",
         googleClassId: "pizza-456",
-        passField: [],
+        passFields: [],
         passTypeId: "loyalty-pass",
       },
     ];

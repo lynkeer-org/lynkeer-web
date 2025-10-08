@@ -1,11 +1,10 @@
 "use server";
 
 import { getCustomerByEmailRequest } from "@/features/customer/services/getCustomerByEmailRequest";
-import { startClient } from "@/mocks/startClient";
+import { startServer } from "@/mocks/startServer";
 import { HttpStatusCode } from "axios";
 
 export async function getCustomerByEmail(email: string) {
-  startClient();
   const response = await getCustomerByEmailRequest(email);
 
   if (response.error) {

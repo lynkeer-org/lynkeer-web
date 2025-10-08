@@ -4,7 +4,7 @@ import { serviceApi } from "@/lib/axios/serviceApi";
 
 async function createCustomerRequest(data: CreateCustomerRequest) {
   try {
-    const response = await serviceApi.post<CustomerResponse>("/v1/customer", data);
+    const response = await serviceApi.post<CustomerResponse>("/v1/customers", data);
     return { status: response.status, data: response.data };
   } catch (error) {
     return {

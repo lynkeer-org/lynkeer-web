@@ -31,7 +31,7 @@ async function createLoyaltyPassTemplates(form: LoyaltyPassType) {
       googleClassId: googleClassId,
       applePassTypeIdentifier: passTypeIdentifierEnv ?? "",
       passTypeId: data.passTypeId,
-      passField: passFields,
+      passFields,
     };
 
     const response = await createPassTemplateRequest(passTemplateData);

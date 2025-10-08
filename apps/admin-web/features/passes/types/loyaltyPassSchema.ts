@@ -21,7 +21,7 @@ interface PassTemplateType {
   backgroundColor: string;
   googleClassId: string;
   applePassTypeIdentifier: string;
-  passField: PassField[];
+  passFields: PassField[];
   passTypeId: string;
 }
 
@@ -33,7 +33,7 @@ interface GetPassTemplateResponse extends PassTemplateType {
   ownerId: string;
 }
 
-interface LoyaltyUserType {
+interface GoogleLoyaltyUserType {
   classId: string;
   customerId: string;
   name: string;
@@ -43,5 +43,36 @@ interface LoyaltyUserType {
   rewards: number;
 }
 
+interface AppleLoyaltyUserType {
+  title: string;
+  customerId: string;
+  urlImageStamps: string;
+  stamps: number;
+  rewards: number;
+}
+
+interface AppleLoyaltyPassData {
+  passTypeIdentifier: string;
+  serialNumber: string;
+  teamIdentifier: string;
+  organizationName: string;
+  description: string;
+  logoText: string;
+  foregroundColor: string;
+  backgroundColor: string;
+  labelColor: string;
+  webServiceURL: string;
+  authenticationToken: string;
+  sharingProhibited: boolean;
+}
+
 export { loyaltyPassSchema };
-export type { LoyaltyPassType, PassTemplateType, CreatePassTemplateResponse, GetPassTemplateResponse, LoyaltyUserType };
+export type {
+  LoyaltyPassType,
+  PassTemplateType,
+  CreatePassTemplateResponse,
+  GetPassTemplateResponse,
+  GoogleLoyaltyUserType,
+  AppleLoyaltyUserType,
+  AppleLoyaltyPassData,
+};

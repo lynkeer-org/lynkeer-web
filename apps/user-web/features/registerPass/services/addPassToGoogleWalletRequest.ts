@@ -9,7 +9,7 @@ async function addPassToGoogleWalletRequest({ passUuid, data }: AddPassToGoogleW
   try {
     const response = await adminApi.post<AddPassToGoogleWalletResponse>("/wallet/google/loyaltyObject", {
       pass_uuid: passUuid,
-      user_data: { ...data, os: "android" },
+      user_data: { ...data, os: "android", registrationMethod: "qr" },
     });
 
     return { status: response.status, data: response.data };

@@ -3,11 +3,10 @@
 import { createCustomerRequest } from "@/features/customer/services/createCustomerRequest";
 import { customerSchema } from "@/features/customer/types/customer";
 import type { CreateCustomerRequest } from "@/features/customer/types/customer";
-import { startClient } from "@/mocks/startClient";
+import { startServer } from "@/mocks/startServer";
 import { HttpStatusCode } from "axios";
 
 async function createCustomer(form: CreateCustomerRequest) {
-  startClient();
   const validatedFields = customerSchema.omit({ deviceType: true, registrationMethod: true }).safeParse(form);
 
   if (!validatedFields.success) {
