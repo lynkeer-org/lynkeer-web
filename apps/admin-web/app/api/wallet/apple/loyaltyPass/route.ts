@@ -60,12 +60,12 @@ export async function POST(req: NextRequest) {
     // Prepare headers - include CORS only in development
     const headers: Record<string, string> = {};
 
-    if (process.env.NODE_ENV === "development") {
-      headers["Access-Control-Allow-Origin"] = "*";
-      headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS";
-      headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization";
-      headers["Access-Control-Allow-Credentials"] = "true";
-    }
+    // if (process.env.NODE_ENV === "development") {
+    headers["Access-Control-Allow-Origin"] = "*";
+    headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS";
+    headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization";
+    headers["Access-Control-Allow-Credentials"] = "true";
+    // }
 
     // Return binary format
     return NextResponse.json(
