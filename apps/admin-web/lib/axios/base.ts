@@ -1,9 +1,11 @@
+import { baseUrlApiEnv } from "@/lib/utils/environmentValues";
+import { serviceTokenEnv } from "@/lib/utils/environmentValues";
 import axios from "axios";
 import camelCaseKeys from "camelcase-keys";
 import snakeCaseKeys from "snakecase-keys";
 
 const base = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL_API}/api`,
+  baseURL: `${baseUrlApiEnv}/api`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -20,9 +22,18 @@ const base = axios.create({
     ...(axios.defaults.transformResponse as []),
     (data) => {
       try {
-        const parsed = JSON.parse(data);
-        return camelCaseKeys(parsed, { deep: true });
-      } catch {
+        if (typeof data === "object" && data !== null) {
+          return camelCaseKeys(data, { deep: true });
+        }
+
+        if (typeof data === "string") {
+          const parsed = JSON.parse(data);
+          return camelCaseKeys(parsed, { deep: true });
+        }
+
+        // Return data as is if it's not an object or string
+        return data;
+      } catch (_error) {
         return data;
       }
     },
@@ -36,4 +47,13 @@ const internal = axios.create({
   },
 });
 
-export { base, internal };
+const service = axios.create({
+  baseURL: `${baseUrlApiEnv}/api`,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${serviceTokenEnv}`,
+    // Authorization: `ApiKey ${serviceTokenEnv}`,
+  },
+});
+
+export { base, internal, service };

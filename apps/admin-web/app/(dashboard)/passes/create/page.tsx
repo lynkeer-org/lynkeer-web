@@ -1,9 +1,5 @@
-import { CreatePassPageClient } from "./page.client";
+import { PassFormPage } from "@/features/passes/pages/PassFormPage";
 
-export default function CreatePassPage() {
-  return (
-    <section>
-      <CreatePassPageClient />
-    </section>
-  );
+export default function Page() {
+  return <PassFormPage />;
 }

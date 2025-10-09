@@ -1,22 +1,23 @@
 {
   "version": "0.2.0",
   "configurations": [
+    // ───────── ADMIN (puerto 3000) ─────────
     {
-      "name": "Next.js: debug server-side",
+      "name": "Admin: debug server-side",
       "type": "node-terminal",
       "request": "launch",
       "command": "pnpm dev",
       "cwd": "${workspaceFolder}/apps/admin-web"
     },
     {
-      "name": "Next.js: debug client-side",
+      "name": "Admin: debug client-side",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:3000",
       "cwd": "${workspaceFolder}/apps/admin-web"
     },
     {
-      "name": "Next.js: debug full stack",
+      "name": "Admin: debug full stack",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/apps/admin-web/node_modules/next/dist/bin/next",
@@ -30,6 +31,47 @@
         "webRoot": "${workspaceFolder}"
       },
       "cwd": "${workspaceFolder}/apps/admin-web"
+    },
+    // ──────── USER (puerto 3001) ────────
+    {
+      "name": "User: debug server-side",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm dev",
+      "cwd": "${workspaceFolder}/apps/user-web"
+    },
+    {
+      "name": "User: debug client-side",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3001",
+      "cwd": "${workspaceFolder}/apps/user-web"
+    },
+    {
+      "name": "User: debug full stack",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/apps/user-web/node_modules/next/dist/bin/next",
+      "runtimeArgs": ["--inspect"],
+      "skipFiles": ["<node_internals>/**"],
+      "serverReadyAction": {
+        "action": "debugWithChrome",
+        "killOnServerStop": true,
+        "pattern": "- Local:.+(https?://.+)",
+        "uriFormat": "%s",
+        "webRoot": "${workspaceFolder}"
+      },
+      "cwd": "${workspaceFolder}/apps/user-web"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Launch both servers (terminal)",
+      "configurations": ["Admin: debug server-side", "User: debug server-side"]
+    },
+    {
+      "name": "Debug both full stack",
+      "configurations": ["Admin: debug full stack", "User: debug full stack"]
     }
   ]
 }

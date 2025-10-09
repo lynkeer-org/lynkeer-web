@@ -93,7 +93,7 @@ This will place the UI components in the `packages/ui/src/components` directory.
 
 ## 🔒 Environment Variables
 
-Create a `.env` file in the root directory with the following variables:
+Create a `.env` file in the root directory of `apps/admin-web` with the following variables:
 
 ```env
 AUTH_SECRET=
@@ -105,11 +105,14 @@ APPLE_CERT_PASSWORD=
 APPLE_PASS_TYPE_IDENTIFIER=
 APPLE_TEAM_IDENTIFIER=
 APPLE_AUTHENTICATION_TOKEN=
+APPLE_WWDR_PEM_BASE64=
+APPLE_CERTIFICATE_PEM_BASE64=
+APPLE_KEY_PEM_BASE64=
 
-NEXT_PUBLIC_APP_URL=
 NEXT_PUBLIC_BASE_URL_API=
 NEXT_PUBLIC_DEFAULT_ROUTE = 
 NEXT_PUBLIC_API_MOCKING=
+NEXT_PUBLIC_VERCEL_URL=
 ```
 
 ## 🤝 Contributing

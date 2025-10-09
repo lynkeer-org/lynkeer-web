@@ -1,0 +1,64 @@
+.hideScrollbar {
+  /* Firefox */
+  scrollbar-width: none;
+  /* IE and old Edge */
+  -ms-overflow-style: none;
+}
+
+.hideScrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.fadeMask {
+  /* Gradiente transparente en extremos para indicar overflow */
+  /* WebKit */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  /* Estándar */
+  mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+.fadeNone {
+  /* Sin desvanecido */
+  -webkit-mask-image: linear-gradient(to right, black 0, black 100%);
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: linear-gradient(to right, black 0, black 100%);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+.fadeLeft {
+  /* Desvanecido solo a la izquierda */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 16px, black 100%);
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: linear-gradient(to right, transparent 0, black 16px, black 100%);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+.fadeRight {
+  /* Desvanecido solo a la derecha */
+  -webkit-mask-image: linear-gradient(to right, black 0, black calc(100% - 16px), transparent 100%);
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: linear-gradient(to right, black 0, black calc(100% - 16px), transparent 100%);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+.fadeBoth {
+  /* Desvanecido a ambos lados */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}

@@ -1,0 +1,288 @@
+---
+alwaysApply: false
+---
+
+# Feature Request Implementation Flow
+
+This rule provides a standardized approach for implementing new features requests in the Lynkeer web applications. Follow these steps to ensure consistency and maintainability.
+
+## 1. Types Setup
+- Create types in `features/[feature-name]/types/[feature]Schema.ts`
+```typescript
+// Example: customerSchema.ts
+export interface CustomerRequest {
+  // Request type properties
+}
+
+export interface CustomerResponse {
+  // Response type properties
+}
+```
+
+## 2. Error Types
+- Add error types in `features/[feature-name]/lib/errorTypes.ts`
+```typescript
+const FEATURE_CREATE_ERROR = "feature_create_error";
+const FEATURE_GET_ERROR = "feature_get_error";
+const FEATURE_UPDATE_ERROR = "feature_update_error";
+// Add other error constants
+
+export const errorTypes = {
+  FEATURE_CREATE_ERROR,
+  FEATURE_GET_ERROR,
+  FEATURE_UPDATE_ERROR,
+  // Export error constants
+};
+```
+
+## 3. Service Layer
+- Create service in `features/[feature-name]/services/[feature]Request.ts`
+```typescript
+import { privateApi } from "@/lib/axios/privateApi";
+import { redirectToSignOut } from "@/lib/axios/requestValidation";
+import { errorTypes } from "../lib/errorTypes";
+import type { FeatureRequest, FeatureResponse } from "../types/featureSchema";
+
+async function featureRequest(data: FeatureRequest) {
+  try {
+    const response = await privateApi.post<FeatureResponse>("/v1/endpoint", data);
+    return { status: response.status, data: response.data };
+  } catch (error) {
+    redirectToSignOut(error);
+    return {
+      error: {
+        code: errorTypes.FEATURE_ACTION_ERROR,
+        message: error instanceof Error ? error.message : "An unknown error occurred",
+      },
+    };
+  }
+}
+
+export { featureRequest };
+```
+
+## 4. Server Action
+- Create action in `app/[feature-page]/actions/[feature].ts`
+```typescript
+"use server";
+
+import { featureRequest } from "@/features/feature/services/featureRequest";
+import { HttpStatusCode } from "axios";
+import type { FeatureRequest } from "@/features/feature/types/featureSchema";
+
+export async function featureAction(data: FeatureRequest) {
+  const response = await featureRequest(data);
+
+  if (response.error) {
+    throw new Error(response.error.message, { cause: response.error });
+  }
+
+  return {
+    success: response.status === HttpStatusCode.Created,
+    data: response.data,
+  };
+}
+```
+
+## 5. React Query Hook
+- Create hook in `features/[feature-name]/hooks/use[Feature].ts`
+```typescript
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { featureAction } from "@/app/feature-page/actions/feature";
+import type { FeatureRequest } from "../types/featureSchema";
+
+export function useFeature() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data: FeatureRequest) => {
+      const response = await featureAction(data);
+      return response.data;
+    },
+    onSuccess: () => {
+      // Invalidate related queries
+      queryClient.invalidateQueries({ queryKey: ["related-query"] });
+    },
+  });
+}
+```
+
+## 6. Mock Implementation
+- Add mock handler in `mocks/handlers.ts`
+```typescript
+// Add at the bottom of handlers array
+http.post(`${API}/api/v1/endpoint`, async ({ request }) => {
+  const body = (await request.json()) as FeatureRequest;
+
+  // Add validation logic
+  if (body.someField === "invalid") {
+    return HttpResponse.json(
+      { error: "FEATURE_ERROR" },
+      { status: 409 }
+    );
+  }
+
+  const mockResponse = {
+    id: `feature-${Math.random().toString(36).substring(2, 15)}`,
+    ...body,
+    createdAt: new Date().toISOString(),
+  };
+
+  return HttpResponse.json(mockResponse, { status: 201 });
+}),
+```
+
+## 7. Unit Tests
+Create test files with the following structure:
+
+### Hook Test
+```typescript
+// features/[feature-name]/hooks/__tests__/useFeature.test.ts
+import { renderHook, waitFor } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { useFeature } from "../useFeature";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+describe("useFeature", () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
+  const wrapper = ({ children }) => (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
+
+  it("should handle successful mutation", async () => {
+    const { result } = renderHook(() => useFeature(), { wrapper });
+    
+    // Add test cases
+    expect(result.current.isLoading).toBe(false);
+  });
+
+  it("should handle error cases", async () => {
+    const { result } = renderHook(() => useFeature(), { wrapper });
+    
+    // Add error test cases
+    await waitFor(() => {
+      expect(result.current.isError).toBe(true);
+    });
+  });
+});
+```
+
+### Service Test
+```typescript
+// features/[feature-name]/services/__tests__/featureRequest.test.ts
+import { describe, expect, it, vi } from "vitest";
+import { featureRequest } from "../featureRequest";
+import { privateApi } from "@/lib/axios/privateApi";
+
+vi.mock("@/lib/axios/privateApi", () => ({
+  privateApi: {
+    post: vi.fn(),
+    get: vi.fn(),
+  },
+}));
+
+describe("featureRequest", () => {
+  it("should handle successful request", async () => {
+    const mockResponse = {
+      status: 200,
+      data: { /* mock data */ },
+    };
+    
+    vi.mocked(privateApi.post).mockResolvedValueOnce(mockResponse);
+    
+    const result = await featureRequest(/* test data */);
+    expect(result.status).toBe(200);
+    expect(result.data).toEqual(mockResponse.data);
+  });
+
+  it("should handle error cases", async () => {
+    const mockError = new Error("Network error");
+    vi.mocked(privateApi.post).mockRejectedValueOnce(mockError);
+    
+    const result = await featureRequest(/* test data */);
+    expect(result.error).toBeDefined();
+    expect(result.error.code).toBe("feature_error");
+  });
+});
+```
+
+### Action Test
+```typescript
+// app/[feature-page]/actions/__tests__/feature.test.ts
+import { describe, expect, it, vi } from "vitest";
+import { featureAction } from "../feature";
+import { featureRequest } from "@/features/feature/services/featureRequest";
+
+vi.mock("@/features/feature/services/featureRequest", () => ({
+  featureRequest: vi.fn(),
+}));
+
+describe("featureAction", () => {
+  it("should handle successful action", async () => {
+    const mockResponse = {
+      status: 201,
+      data: { /* mock data */ },
+    };
+    
+    vi.mocked(featureRequest).mockResolvedValueOnce(mockResponse);
+    
+    const result = await featureAction(/* test data */);
+    expect(result.success).toBe(true);
+    expect(result.data).toEqual(mockResponse.data);
+  });
+
+  it("should handle error cases", async () => {
+    const mockError = {
+      error: {
+        code: "feature_error",
+        message: "Something went wrong",
+      },
+    };
+    
+    vi.mocked(featureRequest).mockResolvedValueOnce(mockError);
+    
+    await expect(featureAction(/* test data */)).rejects.toThrow();
+  });
+});
+```
+
+## Important Notes:
+1. Always use appropriate axios instance (privateApi, publicApi, serviceApi) based on the endpoint requirements
+2. Implement proper error handling at each layer
+3. Use TypeScript for type safety
+4. Follow the established folder structure
+5. Add JSDoc comments for better documentation
+6. Implement proper test coverage
+7. Use consistent naming conventions
+8. Handle loading and error states in UI components
+
+## File Structure Example:
+```
+features/[feature-name]/
+├── components/
+├── hooks/
+│   ├── __tests__/
+│   │   └── useFeature.test.ts
+│   └── useFeature.ts
+├── lib/
+│   └── errorTypes.ts
+├── services/
+│   ├── __tests__/
+│   │   └── featureRequest.test.ts
+│   └── featureRequest.ts
+└── types/
+    └── featureSchema.ts
+
+app/[feature-page]/
+└── actions/
+    ├── __tests__/
+    │   └── feature.test.ts
+    └── feature.ts
+```

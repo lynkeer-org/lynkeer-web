@@ -39,6 +39,41 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "clean": {
+      "cache": false,
+      "dependsOn": [
+        "^clean"
+      ]
+    },
+    "rebuild": {
+      "cache": false,
+      "dependsOn": [
+        "^rebuild"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "vitest.config.ts",
+        "vitest.setup.ts"
+      ]
+    },
+    "test:coverage": {
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "vitest.config.ts",
+        "vitest.setup.ts"
+      ],
+      "outputs": [
+        "coverage/**"
+      ]
     }
   },
   "globalEnv": [
@@ -50,9 +85,16 @@
     "APPLE_PASS_TYPE_IDENTIFIER",
     "APPLE_TEAM_IDENTIFIER",
     "APPLE_AUTHENTICATION_TOKEN",
-    "NEXT_PUBLIC_APP_URL",
+    "APPLE_WEB_SERVICE_URL",
+    "APPLE_WWDR_PEM_BASE64",
+    "APPLE_CERTIFICATE_PEM_BASE64",
+    "APPLE_KEY_PEM_BASE64",
+    "NEXT_PUBLIC_API_MOCKING",
     "NEXT_PUBLIC_BASE_URL_API",
     "NEXT_PUBLIC_DEFAULT_ROUTE",
-    "NEXT_PUBLIC_API_MOCKING"
+    "NEXT_PUBLIC_APP_URL",
+    "NEXT_PUBLIC_USER_APP_URL",
+    "NEXT_PUBLIC_ADMIN_APP_URL",
+    "SERVICE_TOKEN"
   ]
 }

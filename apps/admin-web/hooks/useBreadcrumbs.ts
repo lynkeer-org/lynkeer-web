@@ -1,4 +1,4 @@
-import { buildBreadcrumbs } from "@/lib/breadcrumb/build-breadcrumbs";
+import { buildBreadcrumbs } from "@/lib/breadcrumb/buildBreadcrumbs";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 

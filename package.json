@@ -5,12 +5,16 @@
   "private": true,
   "scripts": {
     "prepare": "husky",
-    "build": "turbo build",
+    "build": "turbo build --force",
     "dev": "turbo dev",
     "lint:root": "biome check",
     "lint": "turbo lint",
     "format": "turbo format",
-    "check:fix": "turbo check:fix"
+    "check:fix": "turbo check:fix",
+    "clean": "turbo clean && rm -rf .turbo && find apps -name .next -type d -prune -exec rm -rf {} +",
+    "rebuild": "pnpm clean && TURBO_FORCE=true turbo build --force",
+    "test": "turbo test",
+    "test:coverage": "turbo test:coverage"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
