@@ -6,7 +6,7 @@ import type { CreateCustomerRequest, CustomerResponse } from "@/features/custome
  * Handles the customer flow: validates if customer exists by email,
  * creates a new customer if not found, and returns the customer data
  */
-export async function handleCustomerFlow(customerData: CreateCustomerRequest): Promise<CustomerResponse> {
+async function handleCustomerFlow(customerData: CreateCustomerRequest): Promise<CustomerResponse> {
   const existingCustomer = await getCustomerByEmail(customerData.email);
 
   if (existingCustomer?.data?.id) {
@@ -16,3 +16,5 @@ export async function handleCustomerFlow(customerData: CreateCustomerRequest): P
   const { data: newCustomer } = await createCustomer(customerData);
   return newCustomer;
 }
+
+export { handleCustomerFlow };

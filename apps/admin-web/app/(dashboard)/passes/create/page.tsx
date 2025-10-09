@@ -1,5 +1,5 @@
-import { CreatePassPage } from "@/features/passes/pages/CreatePassPage";
+import { PassFormPage } from "@/features/passes/pages/PassFormPage";
 
 export default function Page() {
-  return <CreatePassPage />;
+  return <PassFormPage />;
 }
