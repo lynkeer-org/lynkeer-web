@@ -10,6 +10,11 @@ async function createCustomerPass(data: CreateCustomerPassRequest) {
     const response = await createCustomerPassRequest(data);
 
     if (response.error) {
+      console.error("Error in createCustomerPass:", {
+        error: response.error.message,
+        data,
+      });
+
       throw new Error(response.error.message, { cause: response.error });
     }
 
@@ -18,6 +23,12 @@ async function createCustomerPass(data: CreateCustomerPassRequest) {
       data: response.data,
     };
   } catch (error) {
+    console.error("Error in createCustomerPass:", {
+      error: error instanceof Error ? error.message : error,
+      stack: error instanceof Error ? error.stack : undefined,
+      data,
+    });
+
     throw new Error("Failed to create customer pass. Please try again.", { cause: error });
   }
 }

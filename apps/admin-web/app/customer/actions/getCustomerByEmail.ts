@@ -1,7 +1,6 @@
 "use server";
 
 import { getCustomerByEmailRequest } from "@/features/customer/services/getCustomerByEmailRequest";
-import { startServer } from "@/mocks/startServer";
 import { HttpStatusCode } from "axios";
 
 export async function getCustomerByEmail(email: string) {
