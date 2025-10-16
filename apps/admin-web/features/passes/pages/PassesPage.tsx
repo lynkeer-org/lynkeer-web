@@ -18,7 +18,7 @@ function PassesPage() {
   // Show centered CreatePass when no passes exist
   if (!data || data.length === 0) {
     return (
-      <section className="h-screen flex items-center justify-center">
+      <section className="flex justify-center">
         <CreatePass />
       </section>
     );

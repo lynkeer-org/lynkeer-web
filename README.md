@@ -29,6 +29,7 @@ Expect things to break, change, and evolve rapidly.
 lynkeer-web/
 ├── apps/
 │   └── admin-web/               # Admin dashboard application
+│   └── user-web/                # User application
 ├── packages/
 │   ├── ui/                      # Shared UI components
 │   ├── biome-config/            # Shared configuration for linter and formatter
