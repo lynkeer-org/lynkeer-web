@@ -96,7 +96,8 @@ function RegisterPassForm({ passUuid }: RegisterPassFormProps) {
             downloadApplePass(response.data.binaryArray, response.data.filename, response.data.contentType);
             toast.success("Pass descargado exitosamente");
           },
-          onError: () => {
+          onError: (error) => {
+            console.error(error);
             toast.error("Error al agregar la tarjeta a la wallet, intenta nuevamente");
           },
         },

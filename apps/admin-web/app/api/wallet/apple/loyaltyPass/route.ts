@@ -60,12 +60,12 @@ export async function POST(req: NextRequest) {
     // Prepare headers - include CORS only in development
     const headers: Record<string, string> = {};
 
-    // if (process.env.NODE_ENV === "development") {
-    headers["Access-Control-Allow-Origin"] = "*";
-    headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS";
-    headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization";
-    headers["Access-Control-Allow-Credentials"] = "true";
-    // }
+    if (process.env.NODE_ENV === "development") {
+      headers["Access-Control-Allow-Origin"] = "*";
+      headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS";
+      headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization";
+      headers["Access-Control-Allow-Credentials"] = "true";
+    }
 
     // Return binary format
     return NextResponse.json(
@@ -77,7 +77,19 @@ export async function POST(req: NextRequest) {
       { headers, status: 200 },
     );
   } catch (error) {
-    console.error("Error in loyaltyPass route:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    console.error("Error in loyaltyPass route:", {
+      error: error instanceof Error ? error.message : error,
+      stack: error instanceof Error ? error.stack : undefined,
+      passUuid,
+      userEmail: userData?.email,
+      timestamp: new Date().toISOString(),
+    });
+
+    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred: Apple Wallet Pass";
+    const stack = error instanceof Error ? error.stack : undefined;
+    return NextResponse.json(
+      { error: "Failed to generate Apple Wallet Pass", message: errorMessage, stack },
+      { status: 500 },
+    );
   }
 }
